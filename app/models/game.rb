@@ -63,18 +63,18 @@ class Game < ApplicationRecord
 
   # does this logic belong here?
   def is_a_set?(cards)
-    self.colors_for_set && self.shadings_for_set && self.numbers_for_set && self.shapes_for_set
+    colors_for_set && shadings_for_set && numbers_for_set && shapes_for_set
   end
 
   def game_over?
-    self.undrawn_cards == 0 && !self.possible_sets
+    undrawn_cards == 0 && !possible_sets
   end
 
 
   def possible_sets?
     condition = false
-    self.showing_cards.permutation(3).to_a.each do |card_ary|
-      if self.is_a_set?(card_ary)
+    showing_cards.permutation(3).to_a.each do |card_ary|
+      if is_a_set?(card_ary)
         condtion = true
       end
     end
