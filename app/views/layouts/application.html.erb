@@ -12,11 +12,11 @@
     <div class="nav">
       <nav>
         <% if current_user %>
-          Signed in as <a href="/users/<%= current_user.id %>"><%= current_user.username %></a> | <%= link_to "Logout", '/logout' %>
+          Signed in as <a href="/players/<%= current_user.id %>"><%= current_user.username %></a> | <%= link_to "Logout", '/logout' %>
         <% else %>
-          <%= link_to 'Login', '/login' %> | <%= link_to 'Register', '/users/new' %>
+          <%= link_to 'Login', '/login' %> | <%= link_to 'Register', '/players/new' %>
         <% end %>
-        | <%= link_to 'Main', '/decks' %>
+        | <%= link_to 'Main', '/' %>
       </nav>
     </div>
     <%= yield %>
