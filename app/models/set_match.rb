@@ -1,0 +1,2 @@
+class SetMatch < ApplicationRecord
+end
