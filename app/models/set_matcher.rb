@@ -39,4 +39,12 @@ class SetMatcher
     colors_for_set(cards) && shadings_for_set(cards) && numbers_for_set(cards) && shapes_for_set(cards)
   end
 
+  def self.find_cards(id_ary)
+    found_cards = []
+    id_ary.each do |id|
+     found_cards << Card.find(id)
+    end
+    found_cards
+  end
+
 end
