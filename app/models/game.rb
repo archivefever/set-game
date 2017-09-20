@@ -8,6 +8,10 @@ class Game < ApplicationRecord
   has_many :grouped_cards, ->{ where("game_cards.status" => "grouped")}, through: :game_cards, source: :cards
 
 
+  def load_deck
+    81.times { |n| GameCard.create(game_id: self.id, card_id: n + 1) }
+  end
+
   def next_deal
     self.undrawn_cards.sample(3)
   end
