@@ -1,18 +1,52 @@
 class Game < ApplicationRecord
   belongs_to :player
-  has_many :grids
-  has_many :set_matches
+  has_many :game_cards
+  has_many :cards, through: :game_cards
+  has_many :undrawn_cards, ->{ where("game_cards.status" => "undrawn")} through: :game_cards, source: :cards
+  has_many :showing_cards, ->{ where("game_cards.status" => "showing")} through: :game_cards, source: :cards
+  has_many :grouped_cards, ->{ where("game_cards.status" => "grouped")} through: :game_cards, source: :cards
 
-  has_many :cards, through: :grids
-  has_many :unplayed_cards, ->{ where ""}, through: :grids, source: :cards
 
-  #game logic
-  # unplayed cards are 1.) not on the grid, 2.) do not belong to a set
-
-  def unplayed_cards
-    not_in_a_set_match = []
-    self
+  def next_deal
+    self.undrawn_cards.sample(3)
   end
 
+  def initial_deal
+    GameCards.all.sample(9)
+  end
+
+  def game_time
+    (self.updated_at - self.created_at).time_in_words
+  end
+
+  # does this logic belong here?
+  def self.is_a_set?(cards)
+    card_1 = cards[0]
+    card_2 = cards[1]
+    card_3 = cards[2]
+
+      ((card_1.color == card_2.color && card_1.color == card_3.color && card_2.color == card_3.color)
+      &&
+      (card_1.shape == card_2.shape && card_1.shape == card_3.shape && card_2.shape == card_3.shape)
+      &&
+      (card_1.shading == card_2.shading && card_1.shading == card_3.shading && card_2.shading == card_3.shading))
+    ||
+      ((card_1.color != card_2.color && card_1.color != card_3.color && card_2.color != card_3.color)
+        &&
+      (card_1.shape != card_2.shape && card_1.shape != card_3.shape && card_2.shape == card_3.shape)
+        &&
+      (card_1.shading != card_2.shading && card_1.shading == card_3.shading && card_2.shading == card_3.shading))
+  end
+
+# game over
 
 end
+
+
+# shapes: squiggle, oval, diamond
+# shading: solid, hatched, empty
+# colors: red, green, purple
+# number: 1, 2, 3
+
+
+

@@ -1,4 +1,4 @@
 class Card < ApplicationRecord
-  belongs_to :set_match, optional: true
-  has_many :grids
+  has_many :game_cards
+
 end

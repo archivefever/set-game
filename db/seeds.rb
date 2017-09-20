@@ -1,7 +1,22 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# shapes: squiggle, oval, diamond
+# shading: solid, hatched, empty
+# colors: red, green, purple
+# number: 1, 2, 3
+
+colors = ["red", "green", "purple"]
+shadings = ["solid", "hatched", "empty"]
+shapes = ["squiggle", "oval", "diamond"]
+numbers = [1, 2, 3]
+
+
+colors.each do |color|
+  shadings.each do |shading|
+    shapes.each do |shape|
+      numbers.each do |number|
+        Card.create!(color: color, shading: shading, shape: shape, number: number)
+      end
+    end
+  end
+end
+
+
