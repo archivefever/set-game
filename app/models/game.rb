@@ -13,7 +13,7 @@ class Game < ApplicationRecord
   end
 
   def initial_deal
-    GameCards.all.sample(9)
+    self.cards.sample(9)
   end
 
   def game_time
@@ -22,15 +22,15 @@ class Game < ApplicationRecord
 
 
   def game_over?
-    undrawn_cards == 0 && !possible_sets
+    self.undrawn_cards == 0 && !possible_sets
   end
 
 
   def possible_sets?
     condition = false
     showing_cards.permutation(3).to_a.each do |card_ary|
-      if is_a_set?(card_ary)
-        condtion = true
+      if SetMatcher.is_a_set?(card_ary)
+        condition = true
       end
     end
     condition
