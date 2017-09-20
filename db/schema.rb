@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170920203353) do
   create_table "game_cards", force: :cascade do |t|
     t.integer "game_id"
     t.integer "card_id"
-    t.string "status"
+    t.string "status", default: "undrawn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
