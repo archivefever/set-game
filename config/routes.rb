@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+    resources :sessions, only: [:new, :destroy, :create]
     resources :players, only: [:new, :show, :create]
 
     get '/session-inspector' => 'sessions#inspector'

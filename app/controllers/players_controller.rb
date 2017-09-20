@@ -19,7 +19,7 @@ class PlayersController < ApplicationController
       session[:player_id] = @player.id
       redirect_to "/players/#{@player.id}"
     else
-      render :new
+      redirect_to "/players/new", notice: "registration info invalid"
     end
   end
 
@@ -30,7 +30,7 @@ class PlayersController < ApplicationController
   end
 
   def player_params
-    params.require(:player).permit(:username, :password, :password_confirmation)
+    params.require(:player).permit(:username, :email, :password, :password_confirmation)
   end
 
 end

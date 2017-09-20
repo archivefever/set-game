@@ -1,0 +1,12 @@
+<h1>login here</h1>
+
+<p id="notice"><%= notice %></p>
+
+<%= form_with scope: :session, url: sessions_path, local: true do |f| %>
+
+  Email: <%= f.text_field :email %>
+  Password: <%= f.password_field :password %>
+  <%= f.submit "Submit" %>
+
+
+<% end %>

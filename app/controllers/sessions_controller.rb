@@ -4,23 +4,22 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:player_id] = nil
     redirect_to '/'
   end
 
   def inspector
-    render plain: session[:user_id].inspect
+    render plain: session[:player_id].inspect
   end
 
   def create
-    @player = Player.find_by(username: params[:session][:username])
+    @player = Player.find_by(email: params[:session][:email])
 
-    if @player.authenticate(params[:session][:password])
-      session[:user_id] = @player.id
+    if @player && @player.authenticate(params[:session][:password])
+      session[:player_id] = @player.id
       redirect_to "/"
     else
-      @errors = ['login info not right']
-      render :new
+      redirect_to "/login", notice: "login info not right"
     end
   end
 
