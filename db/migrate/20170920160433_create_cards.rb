@@ -5,7 +5,6 @@ class CreateCards < ActiveRecord::Migration[5.1]
       t.string    :shape
       t.string    :shading
       t.integer   :number
-      t.integer   :set_id
 
       t.timestamps
     end
