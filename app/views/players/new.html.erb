@@ -1,0 +1,12 @@
+<h1>Register a new Player:</h1>
+
+<p id="notice"><%= notice %></p>
+
+<%= form_for :player, url: {action: 'create'} do |f| %>
+  Username: <%= f.text_field :username  %>
+  Email: <%= f.text_field :email  %>
+  Password: <%= f.password_field :password  %>
+  Password Confirmation: <%= f.password_field :password_confirmation  %>
+  <%= f.submit  %>
+<% end  %>
+
