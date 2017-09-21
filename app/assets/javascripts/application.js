@@ -16,37 +16,32 @@
 
 $(document).ready(function() {
   var selectedCards = []
-
-//closest here should be find since it is searching for a descendant rather than an ancestor
-// this function needs to run 3 times??
-
-
-  if(selectedCards.length < 2){
-    $(".card-show").on("click", function(event){
+    $("ul").on("click", ".card-show", function(event) {
       event.preventDefault();
-      var card_id = $(this).find(".card-id").attr("id")
-      selectedCards.push(card_id)
-      $(this).css("border", "yellow").addClass("selected-cards");
-    })
-  }
-    else if(selectedCards.length === 2){
-      $(".card-show").on("click", function(event){
-      event.preventDefault();
-      var card_id = $(this).find(".card-id").attr("id")
-      selectedCards.push(card_id)
-      $(this).css("border", "yellow").addClass('selected-cards');
-    })
-      $.ajax({
-        url: '/games/check_cards',
-        data: { selectedCardIds: selectedCards },
-        dataType: 'json'
-      })
-      .done(function(ajaxReturn) {
-        console.log("success");
+      if(selectedCards.length < 2){
+        var card_id = $(this).find(".card-id").attr("id")
+        selectedCards.push(card_id)
+        $(this).css("border", "yellow").addClass("selected-cards");
+       }
+      else if(selectedCards.length === 2){
+          var card_id = $(this).find(".card-id").attr("id")
+          selectedCards.push(card_id)
+          $(this).css("border", "yellow").addClass('selected-cards');
 
+          $.ajax({
+            url: '/games/check_cards',
+            method: 'POST',
+            data: { selectedCardIds: selectedCards },
+          })
+          .done(function(ajaxReturn) {
+            $("#all-cards").append(ajaxReturn)
+          })
+          .always(function(ajaxReturn){
+            $("div").remove(".selected-cards");
+            selectedCards = []
+          })
+        }
       })
-    }
-
 
 });
 

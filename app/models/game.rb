@@ -17,22 +17,17 @@ class Game < ApplicationRecord
     new_cards.each do |card|
       GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
     end
-    card_hash =
-     {card_1:
-        {shape: new_cards[0].shape, shading: new_cards[0].shading, color: new_cards[0].color, number: new_cards[0].number},
-      card_2:
-        {shape: new_cards[1].shape, shading: new_cards[1].shading, color: new_cards[1].color, number: new_cards[1].number},
-      card_3:
-        {shape: new_cards[2].shape, shading: new_cards[2].shading, color: new_cards[2].color, number: new_cards[2].number}
-      }
   end
 
   def initial_deal
-    deal = self.cards.sample(9)
+    deal = self.undrawn_cards.sample(9)
     deal.each do |card|
       GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
     end
-    deal
+    if !possible_sets?
+      deal << next_deal
+    end
+    deal.flatten
   end
 
   def game_time
@@ -43,9 +38,19 @@ class Game < ApplicationRecord
     self.undrawn_cards == 0 && !possible_sets
   end
 
+  def find_true_sets
+    true_sets = []
+    showing_cards.to_a.combination(3).to_a.each do |card_ary|
+      if SetMatcher.is_a_set?(card_ary)
+        true_sets << card_ary
+      end
+    end
+    true_sets
+  end
+
   def possible_sets?
     condition = false
-    showing_cards.combination(3).to_a.each do |card_ary|
+    showing_cards.to_a.combination(3).to_a.each do |card_ary|
       if SetMatcher.is_a_set?(card_ary)
         condition = true
       end
@@ -55,4 +60,15 @@ class Game < ApplicationRecord
 
 end
 
+# new_cards.each do |card|
+#       GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
+#     end
+#     card_hash =
+#      {card_1:
+#         {shape: new_cards[0].shape, shading: new_cards[0].shading, color: new_cards[0].color, number: new_cards[0].number},
+#       card_2:
+#         {shape: new_cards[1].shape, shading: new_cards[1].shading, color: new_cards[1].color, number: new_cards[1].number},
+#       card_3:
+#         {shape: new_cards[2].shape, shading: new_cards[2].shading, color: new_cards[2].color, number: new_cards[2].number}
+#       }
 
