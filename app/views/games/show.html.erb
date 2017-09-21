@@ -1,0 +1,23 @@
+<h1>Game Show Page</h1>
+<div id="card-grid">
+
+  <ul>
+    <% @game.initial_deal.each do |card| %>
+      <%= render partial: "card_show", locals: {card: card } %>
+    <% end %>
+  </ul>
+
+    <% if @game.over? == false %>
+      <% if @game.possible_sets? == false %>
+        <% @game.next_deal.each do |card| %>
+          <%= render partial: "card_show", locals: {card: card } %>
+        <% end %>
+      <% else %>
+        <% @game.create_set(cards) %>
+      <% end %>
+    <% else %>
+      Time to complete game: <%= @game.game_time %>
+      <a href="/games/new">Play again?</a>
+    <% end %>
+  <% end %>
+</div>

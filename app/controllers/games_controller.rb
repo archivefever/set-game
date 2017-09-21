@@ -5,7 +5,6 @@ class GamesController < ApplicationController
   end
 
   def show
-
   end
 
   def create
@@ -15,6 +14,16 @@ class GamesController < ApplicationController
       @game = Game.create
     end
     redirect_to game_url
+  end
+
+  def check_cards
+    player_selection = SetMatcher.find_cards(params[:selectedCardIds])
+    if SetMatcher.is_a_set?(player_selection)
+
+    else
+      params[:selectedCardIds]
+    end
+
   end
 
 end

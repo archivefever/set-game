@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+ div#card-show {
+  border-width: 2px;
+  border-style: solid;
+ }
