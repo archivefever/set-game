@@ -1,7 +1,7 @@
 class SetMatcher
 
   def self.is_a_set?(cards)
-    attributes_for_set(cards, "color") && attributes_for_set(cards, "shading") && attributes_for_set(cards, "number") && attributes_for_set(cards, "shape")
+    attributes_for_set(cards, :color) && attributes_for_set(cards, :shading) && attributes_for_set(cards, :number) && attributes_for_set(cards, :shape)
   end
 
   def self.find_cards(id_ary)
