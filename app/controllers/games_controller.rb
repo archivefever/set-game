@@ -23,7 +23,7 @@ class GamesController < ApplicationController
   end
 
   def stats
-
+    @game = Game.last
   end
 
   def check_cards
@@ -40,8 +40,8 @@ class GamesController < ApplicationController
          end
       end
     else
-      # redirect to stats page
-      end
+      game = Game.last
+      redirect_to "/games/#{game.id}/stats"
     end
   end
 
