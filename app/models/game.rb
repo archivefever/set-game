@@ -31,7 +31,8 @@ class Game < ApplicationRecord
   end
 
   def game_time
-    distance_of_time_in_words(self.updated_at, self.created_at)
+    last_updated_card = GameCard.where("game_id = ?", self.id).where('updated_at != created_at').order('updated_at DESC').first
+    last_updated_card.updated_at - last_updated_card.created_at
   end
 
   def game_over?
