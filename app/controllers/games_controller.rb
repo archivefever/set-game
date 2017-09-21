@@ -25,21 +25,15 @@ class GamesController < ApplicationController
 
   def check_cards
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
-    if !game_over?
-      if SetMatcher.is_a_set?(player_selection)
-        SetMatcher.make_group(player_selection)
-         respond_to do |format|
-          format.html { render partial: '/partials/card_show_three', locals:{player_selection: current_game.next_deal}}
-         end
-      else
-        respond_to do |format|
-          format.html { render partial: '/partials/card_show_three', locals:{player_selection: player_selection}}
-         end
-      end
+    if SetMatcher.is_a_set?(player_selection)
+      SetMatcher.make_group(player_selection)
+       respond_to do |format|
+        format.html { render partial: '/partials/card_show_three', locals:{player_selection: current_game.next_deal}}
+       end
     else
       respond_to do |format|
-        format.html { render partial: //stats partial w/ game over }
-      end
+        format.html { render partial: '/partials/card_show_three', locals:{player_selection: player_selection}}
+       end
     end
   end
 
