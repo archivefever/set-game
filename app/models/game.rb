@@ -9,11 +9,22 @@ class Game < ApplicationRecord
 
 
   def next_deal
-    self.undrawn_cards.sample(3)
+    new_cards = self.undrawn_cards.sample(3)
+    card_hash =
+     {card_1:
+        {shape: new_cards[0].shape, shading: new_cards[0].shading, color: new_cards[0].color, number: new_cards[0].number},
+      card_2:
+        {shape: new_cards[1].shape, shading: new_cards[1].shading, color: new_cards[1].color, number: new_cards[1].number},
+      card_3:
+        {shape: new_cards[2].shape, shading: new_cards[2].shading, color: new_cards[2].color, number: new_cards[2].number}
+      }
   end
 
   def initial_deal
-    self.cards.sample(9)
+    deal = self.cards.sample(9)
+
+
+
   end
 
   def game_time

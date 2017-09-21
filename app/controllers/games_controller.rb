@@ -1,5 +1,8 @@
 class GamesController < ApplicationController
 
+  def index
+  end
+
   def new
 
   end
@@ -16,10 +19,11 @@ class GamesController < ApplicationController
     redirect_to game_url
   end
 
+
   def check_cards
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
     if SetMatcher.is_a_set?(player_selection)
-
+      current_game.next_deal
     else
       params[:selectedCardIds]
     end

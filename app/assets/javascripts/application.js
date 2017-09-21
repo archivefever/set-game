@@ -17,20 +17,24 @@
 $(document).ready(function() {
   var selectedCards = []
 
+//closest here should be find since it is searching for a descendant rather than an ancestor
+// this function needs to run 3 times??
+
+while (selectedCards.length < 3) {
   if(selectedCards.length < 2){
     $("#card-show").on("click", function(event){
       event.preventDefault();
-      var card_id = $(this).closest(".card-id").attr("id")
+      var card_id = $(this).find(".card-id").attr("id")
       selectedCards.push(card_id)
-      $(this).css("border", "yellow");
+      $(this).css("border", "yellow").addClass("selected-cards");
     })
   }
     else if(selectedCards.length === 2){
       $("#card-show").on("click", function(event){
       event.preventDefault();
-      var card_id = $(this).closest(".card-id").attr("id")
+      var card_id = $(this).find(".card-id").attr("id")
       selectedCards.push(card_id)
-      $(this).css("border", "yellow");
+      $(this).css("border", "yellow").addClass('selected-cards');
     })
       $.ajax({
         url: '/games/check_cards',
@@ -42,7 +46,7 @@ $(document).ready(function() {
 
       })
     }
-
+  }
 
 });
 
