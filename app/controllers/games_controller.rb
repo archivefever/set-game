@@ -8,6 +8,11 @@ class GamesController < ApplicationController
   end
 
   def show
+    @game = Game.last
+    @game.load_deck
+    p @game
+    p @game.initial_deal
+    p current_game
   end
 
   def create

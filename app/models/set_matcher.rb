@@ -12,6 +12,12 @@ class SetMatcher
     found_cards
   end
 
+  def self.make_group(cards)
+    cards.each do |card|
+      GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "grouped")
+    end
+  end
+
 
   private
 

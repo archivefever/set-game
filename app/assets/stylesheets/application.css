@@ -14,7 +14,7 @@
  *= require_self
  */
 
- div#card-show {
+ div.card-show {
   border-width: 2px;
   border-style: solid;
  }
