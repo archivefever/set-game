@@ -74,7 +74,7 @@ describe Game do
       game.load_deck
       game.initial_deal
       game.next_deal
-      expect(game.game_time).to eq ""
+      expect(game.game_time).not_to be_zero
     end
 
   end

@@ -36,7 +36,8 @@ class Game < ApplicationRecord
   end
 
   def game_time
-    last_updated_at = GameCard.where(game_id: 5).where('updated_at != created_at').order('updated_at DESC').first
+    last_updated_card = GameCard.where("game_id = ?", self.id).where('updated_at != created_at').order('updated_at DESC').first
+    last_updated_card.updated_at - last_updated_card.created_at
   end
 
   def game_over?
@@ -45,7 +46,7 @@ class Game < ApplicationRecord
 
   def possible_sets?
     condition = false
-    showing_cards.to_a.combination(3).to_a.each do |card_ary|
+    showing_cards.combination(3).to_a.each do |card_ary|
       if SetMatcher.is_a_set?(card_ary)
         condition = true
       end
