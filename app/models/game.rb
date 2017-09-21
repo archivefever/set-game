@@ -3,9 +3,9 @@ class Game < ApplicationRecord
   has_many :game_cards
   has_many :cards, through: :game_cards
 
-  has_many :undrawn_cards, ->{ where("game_cards.status" => "undrawn")}, through: :game_cards, source: :cards
-  has_many :showing_cards, ->{ where("game_cards.status" => "showing")}, through: :game_cards, source: :cards
-  has_many :grouped_cards, ->{ where("game_cards.status" => "grouped")}, through: :game_cards, source: :cards
+  has_many :undrawn_cards, ->{ where("game_cards.status" => "undrawn")}, through: :game_cards, source: :card
+  has_many :showing_cards, ->{ where("game_cards.status" => "showing")}, through: :game_cards, source: :card
+  has_many :grouped_cards, ->{ where("game_cards.status" => "grouped")}, through: :game_cards, source: :card
 
 
   def load_deck
@@ -14,6 +14,9 @@ class Game < ApplicationRecord
 
   def next_deal
     new_cards = self.undrawn_cards.sample(3)
+    new_cards.each do |card|
+      GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
+    end
     card_hash =
      {card_1:
         {shape: new_cards[0].shape, shading: new_cards[0].shading, color: new_cards[0].color, number: new_cards[0].number},
@@ -26,9 +29,10 @@ class Game < ApplicationRecord
 
   def initial_deal
     deal = self.cards.sample(9)
-
-
-
+    deal.each do |card|
+      GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
+    end
+    deal
   end
 
   def game_time

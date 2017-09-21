@@ -9,5 +9,6 @@ class ApplicationController < ActionController::Base
   def current_game
     @current_game ||= Game.last
   end
+  helper_method :current_game
 
 end

@@ -20,9 +20,9 @@ $(document).ready(function() {
 //closest here should be find since it is searching for a descendant rather than an ancestor
 // this function needs to run 3 times??
 
-while (selectedCards.length < 3) {
+
   if(selectedCards.length < 2){
-    $("#card-show").on("click", function(event){
+    $(".card-show").on("click", function(event){
       event.preventDefault();
       var card_id = $(this).find(".card-id").attr("id")
       selectedCards.push(card_id)
@@ -30,7 +30,7 @@ while (selectedCards.length < 3) {
     })
   }
     else if(selectedCards.length === 2){
-      $("#card-show").on("click", function(event){
+      $(".card-show").on("click", function(event){
       event.preventDefault();
       var card_id = $(this).find(".card-id").attr("id")
       selectedCards.push(card_id)
@@ -46,7 +46,7 @@ while (selectedCards.length < 3) {
 
       })
     }
-  }
+
 
 });
 
