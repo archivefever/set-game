@@ -22,6 +22,9 @@ class GamesController < ApplicationController
     redirect_to game_url
   end
 
+  def stats
+    @game = Game.find(params[:id])
+  end
 
   def check_cards
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
@@ -31,9 +34,14 @@ class GamesController < ApplicationController
         format.html { render partial: '/partials/card_show_three', locals:{player_selection: current_game.next_deal}}
        end
     else
+
+#       game = Game.last
+#       redirect_to "/games/#{game.id}/stats"
+
       respond_to do |format|
         format.html { render partial: '/partials/card_show_three', locals:{player_selection: player_selection}}
        end
+
     end
   end
 

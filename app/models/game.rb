@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  include ActionView::Helpers::DateHelper
+
   belongs_to :player, optional: true
   has_many :game_cards
   has_many :cards, through: :game_cards
@@ -30,11 +32,6 @@ class Game < ApplicationRecord
     deal.flatten
   end
 
-  def game_time
-    last_updated_card = GameCard.where("game_id = ?", self.id).where('updated_at != created_at').order('updated_at DESC').first
-    last_updated_card.updated_at - last_updated_card.created_at
-  end
-
   def game_over?
     self.undrawn_cards == 0 && !possible_sets
   end
@@ -59,17 +56,18 @@ class Game < ApplicationRecord
     condition
   end
 
+#######################
+
+  def game_time
+    last_updated_card = GameCard.where("game_id = ?", self.id).where('updated_at != created_at').order('updated_at DESC').first
+    time_ago_in_words(last_updated_card.created_at)
+  end
+
+  def sets_made
+    GameCard.order('id DESC').limit(81).where(status: "grouped").count/3
+  end
+
+
 end
 
-# new_cards.each do |card|
-#       GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
-#     end
-#     card_hash =
-#      {card_1:
-#         {shape: new_cards[0].shape, shading: new_cards[0].shading, color: new_cards[0].color, number: new_cards[0].number},
-#       card_2:
-#         {shape: new_cards[1].shape, shading: new_cards[1].shading, color: new_cards[1].color, number: new_cards[1].number},
-#       card_3:
-#         {shape: new_cards[2].shape, shading: new_cards[2].shading, color: new_cards[2].color, number: new_cards[2].number}
-#       }
 
