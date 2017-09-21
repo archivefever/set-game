@@ -20,14 +20,21 @@ $(document).ready(function() {
       event.preventDefault();
       if(selectedCards.length < 2){
         var card_id = $(this).find(".card-id").attr("id")
-        selectedCards.push(card_id)
-        $(this).css("border", "yellow").addClass("selected-cards");
+        $(this).toggleClass("choose").addClass("selected-cards");
+        if(selectedCards[0] === card_id) {
+          selectedCards.splice(0,1);
+        }
+        else {
+          selectedCards.push(card_id);
+        }
        }
       else if(selectedCards.length === 2){
-          var card_id = $(this).find(".card-id").attr("id")
-          selectedCards.push(card_id)
-          $(this).css("border", "yellow").addClass('selected-cards');
-
+        var card_id = $(this).find(".card-id").attr("id")
+        $(this).toggleClass("choose").addClass('selected-cards');
+        if(selectedCards[0] === card_id || selectedCards[1] === card_id) {
+        }
+        else {
+          selectedCards.push(card_id);
           $.ajax({
             url: '/games/check_cards',
             method: 'POST',
@@ -41,7 +48,8 @@ $(document).ready(function() {
             selectedCards = []
           })
         }
-      })
+      }
+    })
 
 });
 
