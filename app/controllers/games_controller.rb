@@ -23,7 +23,7 @@ class GamesController < ApplicationController
   end
 
   def stats
-    @game = Game.last
+    @game = Game.find(params[:id])
   end
 
   def check_cards
