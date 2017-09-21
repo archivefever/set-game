@@ -1,7 +1,7 @@
 <h1>Game Show Page</h1>
 <div id="card-grid">
 
-  <ul>
+  <ul id="all-cards">
     <% @game.initial_deal.each do |card| %>
       <%= render partial: "partials/card_show", locals: {card: card } %>
     <% end %>
