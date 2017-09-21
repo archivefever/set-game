@@ -17,9 +17,23 @@
  div.card-show {
   border-width: 2px;
   border-style: solid;
+  display: flex;
+  padding: 5px;
+
  }
+
+ div.choose {
+  border-width: 2px;
+  border-color: yellow;
+ }
+
+/* ul#all-cards {
+  display: flex;
+ }*/
+
 
  img {
   max-width: 50%;
   max-height: 50%;
  }
+
