@@ -9,10 +9,8 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.last
+    p @game.id
     @game.load_deck
-    p @game
-    p @game.initial_deal
-    p current_game
   end
 
   def create
@@ -28,6 +26,7 @@ class GamesController < ApplicationController
   def check_cards
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
     if SetMatcher.is_a_set?(player_selection)
+      SetMatcher.make_group(player_selection)
        respond_to do |format|
         format.html { render partial: '/partials/card_show_three', locals:{player_selection: current_game.next_deal}}
        end
