@@ -13,3 +13,41 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  var selectedCards = []
+
+//closest here should be find since it is searching for a descendant rather than an ancestor
+// this function needs to run 3 times??
+
+while (selectedCards.length < 3) {
+  if(selectedCards.length < 2){
+    $("#card-show").on("click", function(event){
+      event.preventDefault();
+      var card_id = $(this).find(".card-id").attr("id")
+      selectedCards.push(card_id)
+      $(this).css("border", "yellow").addClass("selected-cards");
+    })
+  }
+    else if(selectedCards.length === 2){
+      $("#card-show").on("click", function(event){
+      event.preventDefault();
+      var card_id = $(this).find(".card-id").attr("id")
+      selectedCards.push(card_id)
+      $(this).css("border", "yellow").addClass('selected-cards');
+    })
+      $.ajax({
+        url: '/games/check_cards',
+        data: { selectedCardIds: selectedCards },
+        dataType: 'json'
+      })
+      .done(function(ajaxReturn) {
+        console.log("success");
+
+      })
+    }
+  }
+
+});
+
+

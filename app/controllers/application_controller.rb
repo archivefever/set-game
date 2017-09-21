@@ -6,5 +6,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def current_game
+    @current_game ||= Game.last
+  end
 
 end
