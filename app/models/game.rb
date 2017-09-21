@@ -31,7 +31,7 @@ class Game < ApplicationRecord
   end
 
   def game_time
-    (self.updated_at - self.created_at).time_in_words
+    distance_of_time_in_words(self.updated_at, self.created_at)
   end
 
   def game_over?
@@ -60,15 +60,4 @@ class Game < ApplicationRecord
 
 end
 
-# new_cards.each do |card|
-#       GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
-#     end
-#     card_hash =
-#      {card_1:
-#         {shape: new_cards[0].shape, shading: new_cards[0].shading, color: new_cards[0].color, number: new_cards[0].number},
-#       card_2:
-#         {shape: new_cards[1].shape, shading: new_cards[1].shading, color: new_cards[1].color, number: new_cards[1].number},
-#       card_3:
-#         {shape: new_cards[2].shape, shading: new_cards[2].shading, color: new_cards[2].color, number: new_cards[2].number}
-#       }
 

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :games, only: [:index, :new, :show, :create]
 
     post '/games/check_cards' => 'games#check_cards'
+    get '/games/:id/stats' => 'games#stats'
     get '/session-inspector' => 'sessions#inspector'
     get '/logout' => 'sessions#destroy'
     get '/login' => 'sessions#new'

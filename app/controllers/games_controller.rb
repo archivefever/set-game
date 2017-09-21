@@ -22,6 +22,9 @@ class GamesController < ApplicationController
     redirect_to game_url
   end
 
+  def stats
+
+  end
 
   def check_cards
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
@@ -37,8 +40,7 @@ class GamesController < ApplicationController
          end
       end
     else
-      respond_to do |format|
-        format.html { render partial: //stats partial w/ game over }
+      # redirect to stats page
       end
     end
   end
