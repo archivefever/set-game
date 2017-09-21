@@ -35,15 +35,13 @@ class Game < ApplicationRecord
     (self.updated_at - self.created_at).time_in_words
   end
 
-
   def game_over?
     self.undrawn_cards == 0 && !possible_sets
   end
 
-
   def possible_sets?
     condition = false
-    showing_cards.permutation(3).to_a.each do |card_ary|
+    showing_cards.combination(3).to_a.each do |card_ary|
       if SetMatcher.is_a_set?(card_ary)
         condition = true
       end
@@ -52,12 +50,5 @@ class Game < ApplicationRecord
   end
 
 end
-
-
-# shapes: squiggle, oval, diamond
-# shading: solid, hatched, empty
-# colors: red, green, purple
-# number: 1, 2, 3
-
 
 
