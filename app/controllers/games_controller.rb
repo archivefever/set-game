@@ -4,12 +4,12 @@ class GamesController < ApplicationController
   end
 
   def new
-
+    @game = Game.create
+    redirect_to game_path(@game)
   end
 
   def show
     @game = Game.last
-    p @game.id
     @game.load_deck
   end
 
