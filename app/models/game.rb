@@ -64,7 +64,7 @@ class Game < ApplicationRecord
   end
 
   def sets_made
-    GameCard.order('id DESC').limit(81).where(status: "grouped").count/3
+    GameCard.where("game_id = ?", self.id).where(status: "grouped").count/3
   end
 
 

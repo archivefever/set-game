@@ -5,25 +5,16 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.create
+    @game.load_deck
     if current_user
-      @game = Game.create(player_id: current_user.id)
+      @game.update_attributes(player_id: current_user.id)
     end
     redirect_to game_path(@game)
   end
 
   def show
     @game = Game.last
-    @game.load_deck
   end
-
-  # def create
-  #   if current_user
-  #     @game = Game.create(player_id: current_user.id)
-  #   else
-  #     @game = Game.create
-  #   end
-  #   redirect_to game_url
-  # end
 
   def stats
     @game = Game.find(params[:id])
