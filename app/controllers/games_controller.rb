@@ -25,7 +25,7 @@ class GamesController < ApplicationController
     if SetMatcher.is_a_set?(player_selection)
       SetMatcher.make_group(player_selection)
        respond_to do |format|
-        format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: current_game.next_deal}}
+        format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: current_game.duct_tape}}
        end
     else
 
