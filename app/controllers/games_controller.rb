@@ -28,10 +28,6 @@ class GamesController < ApplicationController
         format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: current_game.duct_tape}}
        end
     else
-
-#       game = Game.last
-#       redirect_to "/games/#{game.id}/stats"
-
       respond_to do |format|
         format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: player_selection}}
        end

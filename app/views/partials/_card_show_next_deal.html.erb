@@ -1,14 +1,4 @@
-<p>
 <% player_selection.each do |card| %>
-  <div class="card-show">
-    <div id="<%= card.id %>" class="card-id">
-      <%= image_tag "#{card.color}-#{card.shape}-#{card.shading}-#{card.number}.png" %><br>
-
-      Shape: <%= card.shape %><br>
-      Shading: <%= card.shading %><br>
-      Color:  <%= card.color %><br>
-      Number: <%= card.number %><br>
-    </div>
-  </div>
+  <%= render partial: '/partials/card_show', locals:{ card: card } %>
 <% end %>
-</p>
+

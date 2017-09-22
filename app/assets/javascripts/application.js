@@ -37,7 +37,7 @@ $(document).ready(function() {
           $.ajax({
             url: '/games/check_cards',
             method: 'POST',
-            data: { selectedCardIds: selectedCards },
+            data: { selectedCardIds: selectedCards }
           })
           .done(function(ajaxReturn) {
             $("#all-cards").append(ajaxReturn)

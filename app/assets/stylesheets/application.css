@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+.remaining-cards {
+  border-width: 2px;
+  border-color: blue;
+}
 
  div.card-show {
   border-width: 2px;
@@ -36,4 +40,5 @@
   max-width: 50%;
   max-height: 50%;
  }
+
 
