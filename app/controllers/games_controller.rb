@@ -5,21 +5,15 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.create
+    @game.load_deck
+    if current_user
+      @game.update_attributes(player_id: current_user.id)
+    end
     redirect_to game_path(@game)
   end
 
   def show
-    @game = Game.last
-    @game.load_deck
-  end
-
-  def create
-    if current_user
-      @game = Game.create(player_id: current_user.id)
-    else
-      @game = Game.create
-    end
-    redirect_to game_url
+    @game = Game.find(params[:id])
   end
 
   def stats
@@ -30,6 +24,7 @@ class GamesController < ApplicationController
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
     if SetMatcher.is_a_set?(player_selection)
       SetMatcher.make_group(player_selection)
+      ## game over?
        respond_to do |format|
         format.html { render partial: '/partials/card_show_three', locals:{player_selection: current_game.next_deal}}
        end

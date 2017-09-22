@@ -1,3 +1,4 @@
+<% if player_selection.length > 3 %>
 <div class="card-show">
   <div id="<%= player_selection[0].id %>" class="card-id">
   <%= image_tag "#{player_selection[0].color}-#{player_selection[0].shape}-#{player_selection[0].shading}-#{player_selection[0].number}.png" %><br>
@@ -25,3 +26,60 @@
     Number: <%= player_selection[2].number %><br>
   </div>
 </div>
+<div class="card-show">
+  <div id="<%= player_selection[3].id %>" class="card-id">
+  <%= image_tag "#{player_selection[3].color}-#{player_selection[3].shape}-#{player_selection[3].shading}-#{player_selection[3].number}.png" %><br>
+    Shape: <%= player_selection[3].shape %><br>
+    Shading: <%= player_selection[3].shading %><br>
+    Color:  <%= player_selection[3].color %><br>
+    Number: <%= player_selection[3].number %><br>
+  </div>
+</div>
+<div class="card-show">
+  <div id="<%= player_selection[4].id %>" class="card-id">
+    <%= image_tag "#{player_selection[4].color}-#{player_selection[4].shape}-#{player_selection[4].shading}-#{player_selection[4].number}.png" %><br>
+    Shape: <%= player_selection[4].shape %><br>
+    Shading: <%= player_selection[4].shading %><br>
+    Color:  <%= player_selection[4].color %><br>
+    Number: <%= player_selection[4].number %><br>
+  </div>
+</div>
+<div class="card-show">
+  <div id="<%= player_selection[5].id %>" class="card-id">
+    <%= image_tag "#{player_selection[5].color}-#{player_selection[5].shape}-#{player_selection[5].shading}-#{player_selection[5].number}.png" %><br>
+    Shape: <%= player_selection[5].shape %><br>
+    Shading: <%= player_selection[5].shading %><br>
+    Color:  <%= player_selection[5].color %><br>
+    Number: <%= player_selection[5].number %><br>
+  </div>
+</div>
+
+<% else player_selection.length == 3 %>
+<div class="card-show">
+  <div id="<%= player_selection[0].id %>" class="card-id">
+  <%= image_tag "#{player_selection[0].color}-#{player_selection[0].shape}-#{player_selection[0].shading}-#{player_selection[0].number}.png" %><br>
+    Shape: <%= player_selection[0].shape %><br>
+    Shading: <%= player_selection[0].shading %><br>
+    Color:  <%= player_selection[0].color %><br>
+    Number: <%= player_selection[0].number %><br>
+  </div>
+</div>
+<div class="card-show">
+  <div id="<%= player_selection[1].id %>" class="card-id">
+    <%= image_tag "#{player_selection[1].color}-#{player_selection[1].shape}-#{player_selection[1].shading}-#{player_selection[1].number}.png" %><br>
+    Shape: <%= player_selection[1].shape %><br>
+    Shading: <%= player_selection[1].shading %><br>
+    Color:  <%= player_selection[1].color %><br>
+    Number: <%= player_selection[1].number %><br>
+  </div>
+</div>
+<div class="card-show">
+  <div id="<%= player_selection[2].id %>" class="card-id">
+    <%= image_tag "#{player_selection[2].color}-#{player_selection[2].shape}-#{player_selection[2].shading}-#{player_selection[2].number}.png" %><br>
+    Shape: <%= player_selection[2].shape %><br>
+    Shading: <%= player_selection[2].shading %><br>
+    Color:  <%= player_selection[2].color %><br>
+    Number: <%= player_selection[2].number %><br>
+  </div>
+<% end %>
+

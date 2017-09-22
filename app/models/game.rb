@@ -1,3 +1,4 @@
+require 'pry'
 class Game < ApplicationRecord
   include ActionView::Helpers::DateHelper
 
@@ -14,17 +15,28 @@ class Game < ApplicationRecord
     81.times { |n| GameCard.create(game_id: self.id, card_id: n + 1) }
   end
 
-  def next_deal
+  def draw_three
     new_cards = self.undrawn_cards.sample(3)
     new_cards.each do |card|
       GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
     end
+      new_cards
+  end
+
+
+  def next_deal
+    deal = draw_three
+    if !possible_sets?
+      deal << draw_three
+    end
+    deal.flatten
   end
 
   def initial_deal
     deal = self.undrawn_cards.sample(9)
     deal.each do |card|
       GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
+      # reload
     end
     if !possible_sets?
       deal << next_deal
@@ -36,7 +48,7 @@ class Game < ApplicationRecord
     self.undrawn_cards == 0 && !possible_sets
   end
 
-  def find_true_sets
+  def cheat
     true_sets = []
     showing_cards.to_a.combination(3).to_a.each do |card_ary|
       if SetMatcher.is_a_set?(card_ary)
