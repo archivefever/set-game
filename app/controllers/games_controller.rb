@@ -34,7 +34,7 @@ class GamesController < ApplicationController
     if SetMatcher.is_a_set?(player_selection)
       SetMatcher.make_group(player_selection)
        respond_to do |format|
-        format.html { render partial: '/partials/card_show_three', locals:{player_selection: current_game.next_deal}}
+        format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: current_game.next_deal}}
        end
     else
 
@@ -42,7 +42,7 @@ class GamesController < ApplicationController
 #       redirect_to "/games/#{game.id}/stats"
 
       respond_to do |format|
-        format.html { render partial: '/partials/card_show_three', locals:{player_selection: player_selection}}
+        format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: player_selection}}
        end
 
     end
