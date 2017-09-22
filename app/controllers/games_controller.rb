@@ -5,6 +5,9 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.create
+    if current_user
+      @game = Game.create(player_id: current_user.id)
+    end
     redirect_to game_path(@game)
   end
 
@@ -13,14 +16,14 @@ class GamesController < ApplicationController
     @game.load_deck
   end
 
-  def create
-    if current_user
-      @game = Game.create(player_id: current_user.id)
-    else
-      @game = Game.create
-    end
-    redirect_to game_url
-  end
+  # def create
+  #   if current_user
+  #     @game = Game.create(player_id: current_user.id)
+  #   else
+  #     @game = Game.create
+  #   end
+  #   redirect_to game_url
+  # end
 
   def stats
     @game = Game.find(params[:id])

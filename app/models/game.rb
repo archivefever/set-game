@@ -36,7 +36,7 @@ class Game < ApplicationRecord
     self.undrawn_cards == 0 && !possible_sets
   end
 
-  def find_true_sets
+  def cheat
     true_sets = []
     showing_cards.to_a.combination(3).to_a.each do |card_ary|
       if SetMatcher.is_a_set?(card_ary)
