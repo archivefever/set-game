@@ -14,11 +14,18 @@ class Game < ApplicationRecord
     81.times { |n| GameCard.create(game_id: self.id, card_id: n + 1) }
   end
 
+  def duct_tape
+   return next_deal if !possible_sets? || showing_cards.length < 9
+    []
+  end
+
   def next_deal
     new_cards = self.undrawn_cards.sample(3)
     new_cards.each do |card|
       GameCard.find_by(game_id: Game.last.id, card_id: card.id).update_attributes(status: "showing")
     end
+    new_cards << next_deal if !possible_sets?
+    new_cards.flatten
   end
 
   def initial_deal
@@ -47,6 +54,7 @@ class Game < ApplicationRecord
   end
 
   def possible_sets?
+    reload
     condition = false
     showing_cards.to_a.combination(3).to_a.each do |card_ary|
       if SetMatcher.is_a_set?(card_ary)
