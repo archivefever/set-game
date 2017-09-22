@@ -25,14 +25,28 @@ class GamesController < ApplicationController
     if SetMatcher.is_a_set?(player_selection)
       SetMatcher.make_group(player_selection)
        respond_to do |format|
-        format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: current_game.duct_tape}}
+          format.json do
+            cardPartial = render partial: '/partials/card_show_next_deal', locals:{ player_selection: current_game.duct_tape }
+            scorePartial = render partial: '/partials/current_game_stats', locals:{ game: current_game }
+
+            render json: {
+            new_cards_partial: cardPartial,
+            score: scorePartial }.to_json
+          end
        end
     else
-      respond_to do |format|
-        format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: player_selection}}
-       end
 
+    cardPartial = render_to_string partial: '/partials/card_show_next_deal', locals:{ player_selection: player_selection }
+    scorePartial = render_to_string partial: '/partials/current_game_stats', locals:{ game: current_game }
+      respond_to do |format|
+        format.json do
+            render json: {
+            new_cards_partial: cardPartial,
+            score: scorePartial }.to_json
+          end
+       end
     end
+
   end
 
 end

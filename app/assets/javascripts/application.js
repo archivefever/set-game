@@ -37,14 +37,19 @@ $(document).ready(function() {
           $.ajax({
             url: '/games/check_cards',
             method: 'POST',
-            data: { selectedCardIds: selectedCards }
+            data: { selectedCardIds: selectedCards },
+            dataType: 'json'
           })
           .done(function(ajaxReturn) {
-            $("#all-cards").append(ajaxReturn)
+            var parsedReturn = $.parseJSON(ajaxReturn);
+            $("#all-cards").append(parsedReturn.new_cards_partial)
           })
           .always(function(ajaxReturn){
+            var parsedReturn = $.parseJSON(ajaxReturn);
+            console.log(parsedReturn)
             $("div").remove(".selected-cards");
             selectedCards = []
+            $("#remaining-cards").html(parsedReturn.score)
           })
         }
       }

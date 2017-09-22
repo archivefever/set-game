@@ -1,13 +1,12 @@
 <h1>Game Show Page</h1>
 
 <div id="remaining-cards">
-  Matched Sets: <%= @game.grouped_cards.count/3  %><br>
-  Remaining Cards: <%= @game.undrawn_cards.count  %>
+
 </div>
 
 <div id="card-grid">
   <ul id="all-cards">
-      <%= render partial: "partials/card_show_next_deal", locals: {player_selection: @game.initial_deal } %>
+    <%= render partial: "partials/card_show_next_deal", locals: {player_selection: @game.initial_deal } %>
   </ul>
 
 </div>
