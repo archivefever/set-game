@@ -40,7 +40,7 @@ class Game < ApplicationRecord
   end
 
   def game_over?
-    self.undrawn_cards == 0 && !possible_sets
+    undrawn_cards == 0 && !possible_sets
   end
 
   def cheat

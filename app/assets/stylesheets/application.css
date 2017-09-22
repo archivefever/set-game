@@ -14,11 +14,22 @@
  *= require_self
  */
 
+body {
+  background-color: lightsteelblue;
+}
+
+#page-header {
+  text-align: center;
+}
+
+
  div.card-show {
   border-width: 2px;
   border-style: solid;
-  display: flex;
+  border-color: lightsteelblue;
+  display: inline-block;
   padding: 5px;
+  width: 100px;
 
  }
 
@@ -27,13 +38,19 @@
   border-color: yellow;
  }
 
+ div#card-grid {
+  width: 450px;
+  display: block;
+  margin: 0 auto;
+ }
+
  ul#all-cards {
-  display: flex;
+  display: block;
  }
 
 
  img {
-  max-width: 50%;
-  max-height: 50%;
+  width: 90px;
+  height: 200px;
  }
 
