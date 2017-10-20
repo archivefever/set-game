@@ -13,13 +13,23 @@
 //= require rails-ujs
 //= require_tree .
 
+checkSetArray = function(array) {
+  for(var i=0; i < allSets.length; i++) {
+    if (allSets[i].toString() === array.toString()) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
 $(document).ready(function() {
   var selectedCards = []
     $("ul").on("click", ".card-show", function(event) {
       event.preventDefault();
       if(selectedCards.length < 2){
         var card_id = $(this).find(".card-id").attr("id")
-        $(this).toggleClass("choose").addClass("selected-cards");
+        $(this).toggleClass("selected-cards");
         if(selectedCards[0] === card_id) {
           selectedCards.splice(0,1);
         }
@@ -29,23 +39,38 @@ $(document).ready(function() {
        }
       else if(selectedCards.length === 2){
         var card_id = $(this).find(".card-id").attr("id")
-        $(this).toggleClass("choose").addClass('selected-cards');
-        if(selectedCards[0] === card_id || selectedCards[1] === card_id) {
+        $(this).toggleClass("selected-cards");
+        if(selectedCards[0] === card_id) {
+          selectedCards.splice(0, 1)
+        }
+        else if (selectedCards[1] === card_id) {
+          selectedCards.splice(1, 1)
         }
         else {
           selectedCards.push(card_id);
-          $.ajax({
-            url: '/games/check_cards',
-            method: 'POST',
-            data: { selectedCardIds: selectedCards },
-          })
-          .done(function(ajaxReturn) {
-            $("#all-cards").append(ajaxReturn)
-          })
-          .always(function(ajaxReturn){
-            $("div").remove(".selected-cards");
-            selectedCards = []
-          })
+          console.log(selectedCards);
+          console.log(allSets);
+          console.log(checkSetArray(selectedCards));
+          if (checkSetArray(selectedCards)) {
+            $.ajax({
+              url: '/games/check_cards',
+              method: 'POST',
+              data: { selectedCardIds: selectedCards },
+            })
+            .done(function(ajaxReturn) {
+              $("#all-cards").append(ajaxReturn)
+            })
+            .always(function(ajaxReturn){
+              $("div").remove(".selected-cards");
+              selectedCards = []
+            })
+          }
+          else {
+            console.log("Bad Set");
+            $(".card-show").removeClass(".selected-cards");
+              selectedCards = []
+          }
+
         }
       }
     })
