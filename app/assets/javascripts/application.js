@@ -23,8 +23,23 @@ checkSetArray = function(array) {
   return false;
 }
 
+getRemainingCards = function() {
+    var gameId = $('#game-id').text();
+    $.ajax({
+      url: '/games/check_remaining_cards',
+      method: 'POST',
+      data: {game_id: gameId}
+    })
+    .done(function(ajaxReturn) {
+      console.log(ajaxReturn);
+      $('#remaining-cards').text(ajaxReturn);
+    });
+};
 
 $(document).ready(function() {
+
+  getRemainingCards();
+
   var selectedCards = []
     $("ul").on("click", ".card-show", function(event) {
       event.preventDefault();
@@ -56,15 +71,18 @@ $(document).ready(function() {
               data: { selectedCardIds: selectedCards },
             })
             .done(function(ajaxReturn) {
-              $("#all-cards").append(ajaxReturn)
+              $("#all-cards").append(ajaxReturn);
+              $("#response-bar").text("Nice Work!");
             })
             .always(function(ajaxReturn){
               $(".card-show").remove(".selected-cards");
               selectedCards = []
-            })
+            });
+            getRemainingCards();
           }
           else {
             console.log("Bad Set");
+            $("#response-bar").text("Bad Set, Try Again");
             $(".card-show").removeClass("selected-cards");
               selectedCards = []
           }
