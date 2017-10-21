@@ -21,6 +21,7 @@ class GamesController < ApplicationController
   end
 
   def check_cards
+    p params[:selectedCardIds]
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
     if SetMatcher.is_a_set?(player_selection)
       SetMatcher.make_group(player_selection)

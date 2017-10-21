@@ -15,6 +15,7 @@
 
 checkSetArray = function(array) {
   for(var i=0; i < allSets.length; i++) {
+
     if (allSets[i].toString() === array.toString()) {
       return true;
     }
@@ -48,9 +49,6 @@ $(document).ready(function() {
         }
         else {
           selectedCards.push(card_id);
-          console.log(selectedCards);
-          console.log(allSets);
-          console.log(checkSetArray(selectedCards));
           if (checkSetArray(selectedCards)) {
             $.ajax({
               url: '/games/check_cards',
@@ -61,13 +59,13 @@ $(document).ready(function() {
               $("#all-cards").append(ajaxReturn)
             })
             .always(function(ajaxReturn){
-              $("div").remove(".selected-cards");
+              $(".card-show").remove(".selected-cards");
               selectedCards = []
             })
           }
           else {
             console.log("Bad Set");
-            $(".card-show").removeClass(".selected-cards");
+            $(".card-show").removeClass("selected-cards");
               selectedCards = []
           }
 
