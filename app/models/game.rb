@@ -67,8 +67,8 @@ class Game < ApplicationRecord
 #######################
 
   def game_time
-    last_updated_card = GameCard.where("game_id = ?", self.id).where('updated_at != created_at').order('updated_at DESC').first
-    time_ago_in_words(last_updated_card.created_at)
+    last_updated_card = GameCard.where(game_id: self.id).order(:updated_at).last
+    TimeDifference.between(last_updated_card.created_at, last_updated_card.updated_at).in_minutes.round
   end
 
   def sets_made
