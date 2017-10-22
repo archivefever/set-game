@@ -77,8 +77,8 @@ $(document).ready(function() {
             .always(function(ajaxReturn){
               $(".card-show").remove(".selected-cards");
               selectedCards = []
-            });
             getRemainingCards();
+            });
           }
           else {
             console.log("Bad Set");
