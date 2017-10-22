@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20170920203353) do
     t.string "shape"
     t.string "shading"
     t.integer "number"
-    t.integer "set_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,23 +38,10 @@ ActiveRecord::Schema.define(version: 20170920203353) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "grids", force: :cascade do |t|
-    t.integer "game_id"
-    t.boolean "set_possible"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "players", force: :cascade do |t|
     t.string "username", null: false
     t.string "email", null: false
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "set_matches", force: :cascade do |t|
-    t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

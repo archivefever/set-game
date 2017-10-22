@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_game
-    @current_game ||= Game.last
+    @current_game ||= Game.find(session[:game_id]) if session[:game_id]
   end
   helper_method :current_game
 
