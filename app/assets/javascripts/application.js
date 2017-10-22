@@ -24,15 +24,25 @@ checkSetArray = function(array) {
 }
 
 getRemainingCards = function() {
-    var gameId = $('#game-id').text();
     $.ajax({
       url: '/games/check_remaining_cards',
       method: 'POST',
-      data: {game_id: gameId}
     })
     .done(function(ajaxReturn) {
       console.log(ajaxReturn);
       $('#remaining-cards').text(ajaxReturn);
+    });
+};
+
+var setCount = function() {
+    $.ajax({
+      url: '/games/set_count',
+      method: 'POST',
+    })
+
+    .done(function(ajaxReturn) {
+      console.log(ajaxReturn);
+      $('#sets-made').text(ajaxReturn);
     });
 };
 
@@ -78,6 +88,7 @@ $(document).ready(function() {
               $(".card-show").remove(".selected-cards");
               selectedCards = []
             getRemainingCards();
+            setCount();
             });
           }
           else {

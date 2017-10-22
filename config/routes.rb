@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
     post '/games/check_cards' => 'games#check_cards'
     post '/games/check_remaining_cards' => 'games#check_remaining_cards'
+    post '/games/set_count' => 'games#set_count'
     get '/games/:id/stats' => 'games#stats'
     get '/session-inspector' => 'sessions#inspector'
     get '/logout' => 'sessions#destroy'
