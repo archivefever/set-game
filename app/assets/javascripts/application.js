@@ -24,11 +24,9 @@ checkSetArray = function(array) {
 }
 
 getRemainingCards = function() {
-    var gameId = $('#game-id').text();
     $.ajax({
       url: '/games/check_remaining_cards',
       method: 'POST',
-      data: {game_id: gameId}
     })
     .done(function(ajaxReturn) {
       console.log(ajaxReturn);
@@ -37,11 +35,9 @@ getRemainingCards = function() {
 };
 
 var setCount = function() {
-    var gameId = $('#game-id').text();
     $.ajax({
       url: '/games/set_count',
       method: 'POST',
-      data: {game_id: gameId}
     })
 
     .done(function(ajaxReturn) {
