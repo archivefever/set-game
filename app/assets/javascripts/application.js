@@ -36,6 +36,19 @@ getRemainingCards = function() {
     });
 };
 
+var setCount = function() {
+    var gameId = $('#game-id').text();
+    $.ajax({
+      url: '/games/check_remaining_cards',
+      method: 'POST',
+      data: {game_id: gameId}
+    })
+    .done(function(ajaxReturn) {
+      console.log(ajaxReturn);
+      $('#remaining-cards').text(ajaxReturn);
+    });
+};
+
 $(document).ready(function() {
 
   getRemainingCards();
