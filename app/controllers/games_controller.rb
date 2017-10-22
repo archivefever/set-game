@@ -21,7 +21,15 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
+  def check_remaining_cards
+    p params[:game_id]
+    if request.xhr?
+      render json: Game.find(params[:game_id]).undrawn_cards.count
+    end
+  end
+
   def check_cards
+    p params[:selectedCardIds]
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
     if SetMatcher.is_a_set?(player_selection)
       SetMatcher.make_group(player_selection, current_game.id)

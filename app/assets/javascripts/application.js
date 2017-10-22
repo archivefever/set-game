@@ -13,13 +13,39 @@
 //= require rails-ujs
 //= require_tree .
 
+checkSetArray = function(array) {
+  for(var i=0; i < allSets.length; i++) {
+
+    if (allSets[i].toString() === array.toString()) {
+      return true;
+    }
+  }
+  return false;
+}
+
+getRemainingCards = function() {
+    var gameId = $('#game-id').text();
+    $.ajax({
+      url: '/games/check_remaining_cards',
+      method: 'POST',
+      data: {game_id: gameId}
+    })
+    .done(function(ajaxReturn) {
+      console.log(ajaxReturn);
+      $('#remaining-cards').text(ajaxReturn);
+    });
+};
+
 $(document).ready(function() {
+
+  getRemainingCards();
+
   var selectedCards = []
     $("ul").on("click", ".card-show", function(event) {
       event.preventDefault();
       if(selectedCards.length < 2){
         var card_id = $(this).find(".card-id").attr("id")
-        $(this).toggleClass("choose").addClass("selected-cards");
+        $(this).toggleClass("selected-cards");
         if(selectedCards[0] === card_id) {
           selectedCards.splice(0,1);
         }
@@ -29,23 +55,38 @@ $(document).ready(function() {
        }
       else if(selectedCards.length === 2){
         var card_id = $(this).find(".card-id").attr("id")
-        $(this).toggleClass("choose").addClass('selected-cards');
-        if(selectedCards[0] === card_id || selectedCards[1] === card_id) {
+        $(this).toggleClass("selected-cards");
+        if(selectedCards[0] === card_id) {
+          selectedCards.splice(0, 1)
+        }
+        else if (selectedCards[1] === card_id) {
+          selectedCards.splice(1, 1)
         }
         else {
           selectedCards.push(card_id);
-          $.ajax({
-            url: '/games/check_cards',
-            method: 'POST',
-            data: { selectedCardIds: selectedCards },
-          })
-          .done(function(ajaxReturn) {
-            $("#all-cards").append(ajaxReturn)
-          })
-          .always(function(ajaxReturn){
-            $("div").remove(".selected-cards");
-            selectedCards = []
-          })
+          if (checkSetArray(selectedCards)) {
+            $.ajax({
+              url: '/games/check_cards',
+              method: 'POST',
+              data: { selectedCardIds: selectedCards },
+            })
+            .done(function(ajaxReturn) {
+              $("#all-cards").append(ajaxReturn);
+              $("#response-bar").text("Nice Work!");
+            })
+            .always(function(ajaxReturn){
+              $(".card-show").remove(".selected-cards");
+              selectedCards = []
+            });
+            getRemainingCards();
+          }
+          else {
+            console.log("Bad Set");
+            $("#response-bar").text("Bad Set, Try Again");
+            $(".card-show").removeClass("selected-cards");
+              selectedCards = []
+          }
+
         }
       }
     })
