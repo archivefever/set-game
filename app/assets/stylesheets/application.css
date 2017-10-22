@@ -54,3 +54,7 @@ body {
   height: 200px;
  }
 
+ span#game-id {
+  visibility: hidden;
+
+ }
