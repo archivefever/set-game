@@ -39,13 +39,14 @@ getRemainingCards = function() {
 var setCount = function() {
     var gameId = $('#game-id').text();
     $.ajax({
-      url: '/games/check_remaining_cards',
+      url: '/games/set_count',
       method: 'POST',
       data: {game_id: gameId}
     })
+
     .done(function(ajaxReturn) {
       console.log(ajaxReturn);
-      $('#remaining-cards').text(ajaxReturn);
+      $('#sets-made').text(ajaxReturn);
     });
 };
 
@@ -91,6 +92,7 @@ $(document).ready(function() {
               $(".card-show").remove(".selected-cards");
               selectedCards = []
             getRemainingCards();
+            setCount();
             });
           }
           else {

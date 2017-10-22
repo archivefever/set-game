@@ -14,17 +14,16 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
+    @game = current_game
   end
 
   def stats
-    @game = Game.find(params[:id])
+    @game = current_game
   end
 
   def check_remaining_cards
-    p params[:game_id]
     if request.xhr?
-      render json: Game.find(params[:game_id]).undrawn_cards.count
+      render json: current_game.undrawn_cards.count
     end
   end
 
@@ -41,6 +40,12 @@ class GamesController < ApplicationController
         format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: player_selection}}
        end
 
+    end
+  end
+
+  def set_count
+    if request.xhr?
+      render json: current_game.sets_made
     end
   end
 
