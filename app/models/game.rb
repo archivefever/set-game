@@ -22,7 +22,7 @@ class Game < ApplicationRecord
   def next_deal
     new_cards = self.undrawn_cards.sample(3)
     new_cards.each do |card|
-      GameCard.find_by(game_id: current_game.id, card_id: card.id).update_attributes(status: "showing")
+      GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing")
     end
     new_cards << next_deal if !possible_sets?
     new_cards.flatten
@@ -31,7 +31,7 @@ class Game < ApplicationRecord
   def initial_deal
     deal = self.undrawn_cards.sample(9)
     deal.each do |card|
-      GameCard.find_by(game_id: current_game.id, card_id: card.id).update_attributes(status: "showing")
+      GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing")
     end
     if !possible_sets?
       deal << next_deal

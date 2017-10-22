@@ -12,9 +12,9 @@ class SetMatcher
     found_cards
   end
 
-  def self.make_group(cards)
+  def self.make_group(cards, game_id)
     cards.each do |card|
-      GameCard.find_by(game_id: current_game.id, card_id: card.id).update_attributes(status: "grouped")
+      GameCard.find_by(game_id: game_id, card_id: card.id).update_attributes(status: "grouped")
     end
   end
 
