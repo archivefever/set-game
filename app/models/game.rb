@@ -17,6 +17,7 @@ class Game < ApplicationRecord
   def duct_tape
    return next_deal if !possible_sets? || showing_cards.length < 9
     []
+    # Somewhere in here, there needs to be some logic that finishes the game if there are no new cards and no possible sets.
   end
 
   def next_deal
