@@ -38,6 +38,12 @@ body {
   border-color: yellow;
  }
 
+div.hint {
+  border-width: 2px;
+  border-color: red;
+}
+
+
  div#card-grid {
   width: 450px;
   display: block;
