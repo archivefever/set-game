@@ -53,9 +53,10 @@ var checkForSets = function(cardsOnBoard) {
   possibleSets.forEach(function(element) {
     if(checkSetArray(element)) {
       console.log(element);
-      break;
+      return element;
     }
-    console.log("Can't find matching set.")
+    console.log("Can't find matching set.");
+    [];
   })
 };
 
