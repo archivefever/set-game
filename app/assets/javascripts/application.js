@@ -29,7 +29,6 @@ getRemainingCards = function() {
       method: 'POST',
     })
     .done(function(ajaxReturn) {
-      console.log(ajaxReturn);
       $('#remaining-cards').text(ajaxReturn);
     });
 };
@@ -41,12 +40,43 @@ var setCount = function() {
     })
 
     .done(function(ajaxReturn) {
-      console.log(ajaxReturn);
       $('#sets-made').text(ajaxReturn);
     });
 };
 
+var checkForSets = function(cardsOnBoard) {
+  var possibleSets = [];
+  Util.getAllPossibleCombinations(cardsOnBoard, 3, possibleSets);
+  var foundSet = [];
+  possibleSets.forEach(function(element) {
+    if(checkSetArray(element)) {
+      foundSet = element;
+    }
+  });
+  return foundSet;
+};
+
+var getCardsOnBoard = function() {
+  var ids = $('.card-id').map(function(){
+    return $(this).attr('id');
+  }).get();
+  return ids;
+};
+
+var showHints = function(idArray) {
+  idArray.forEach(function(cardId) {
+    $("#" + cardId).closest('.card-show').toggleClass("hint");
+  })
+};
+
+
 $(document).ready(function() {
+
+  $(this).on('keypress', function(event) {
+    if (event.keyCode == 13) {
+       showHints(checkForSets(getCardsOnBoard()));
+    }
+  });
 
   getRemainingCards();
 
@@ -55,7 +85,7 @@ $(document).ready(function() {
       event.preventDefault();
       if(selectedCards.length < 2){
         var card_id = $(this).find(".card-id").attr("id")
-        $(this).toggleClass("selected-cards");
+        $(this).removeClass("hint").toggleClass("selected-cards");
         if(selectedCards[0] === card_id) {
           selectedCards.splice(0,1);
         }
@@ -65,7 +95,7 @@ $(document).ready(function() {
        }
       else if(selectedCards.length === 2){
         var card_id = $(this).find(".card-id").attr("id")
-        $(this).toggleClass("selected-cards");
+        $(this).removeClass("hint").toggleClass("selected-cards");
         if(selectedCards[0] === card_id) {
           selectedCards.splice(0, 1)
         }
@@ -92,7 +122,6 @@ $(document).ready(function() {
             });
           }
           else {
-            console.log("Bad Set");
             $("#response-bar").text("Bad Set, Try Again");
             $(".card-show").removeClass("selected-cards");
               selectedCards = []
