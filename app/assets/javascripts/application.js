@@ -46,7 +46,27 @@ var setCount = function() {
     });
 };
 
+var checkForSets = function(cardsOnBoard) {
+  var possibleSets = [];
+  Util.getAllPossibleCombinations(cardsOnBoard, 3, possibleSets);
+  console.log(possibleSets);
+  possibleSets.forEach(function(element) {
+    if(checkSetArray(element)) {
+      console.log(element);
+      break;
+    }
+    console.log("Can't find matching set.")
+  })
+};
+
+
 $(document).ready(function() {
+
+  $(this).on('keypress', function(event) {
+    if (event.keyCode == 13) {
+        alert('hi.')
+    }
+})
 
   getRemainingCards();
 
