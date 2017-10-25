@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+ - 2.3.5
+
+services:
+  - postgresql
+
+before_script:
+  - bundle exec rails db:create
+  - bundle exec rails db:migrate
+  - bundle exec rails db:seed
