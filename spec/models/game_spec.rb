@@ -69,14 +69,4 @@ describe Game do
 
   end
 
-  describe "game timer" do
-    it "can calculate total game time" do
-      game.load_deck
-      game.initial_deal
-      game.next_deal
-      expect(game.game_time).not_to be_zero
-    end
-
-  end
-
 end

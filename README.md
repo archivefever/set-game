@@ -14,7 +14,7 @@ After cloning the repo, run:
 `be rails db:migrate`
 `be rails db:seed`
 
-A live version of this game is available [on Heroku](dbc-set.herokuapp.com)
+A live version of this game is available [on Heroku](http://dbc-set.herokuapp.com)
 
 ## How to play:
 
