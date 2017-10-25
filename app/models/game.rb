@@ -9,6 +9,29 @@ class Game < ApplicationRecord
   has_many :showing_cards, ->{ where("game_cards.status" => "showing")}, through: :game_cards, source: :card
   has_many :grouped_cards, ->{ where("game_cards.status" => "grouped")}, through: :game_cards, source: :card
 
+  def self.start(uuid1, uuid2)
+    #This is all heavily chess dependent
+    white, black = [uuid1, uuid2].shuffle
+
+    ActionCable.server.broadcast "player_#{white}", {action: "game_start", msg: "white"}
+    ActionCable.server.broadcast "player_#{black}", {action: "game_start", msg: "black"}
+
+    REDIS.set("opponent_for:#{white}", black)
+    REDIS.set("opponent_for:#{black}", white)
+  end
+
+  def self.make_move(uuid, data)
+    opponent = opponent_for(uuid)
+    move_string = "#{data["from"]}-#{data["to"]}"
+
+    ActionCable.server.broadcast "player_#{opponent}", {action: "make_move", msg: move_string}
+  end
+
+  def self.forfeit(uuid)
+    if winner = opponent_for(uuid)
+      ActionCable.server.broadcast "player_#{winner}", {action: "opponent_forfeits"}
+    end
+  end
 
   def load_deck
     81.times { |n| GameCard.create(game_id: self.id, card_id: n + 1) }
