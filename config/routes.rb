@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     get '/logout' => 'sessions#destroy'
     get '/login' => 'sessions#new'
 
-    root 'games#index'
+
+    root to: "games#index"
+    mount ActionCable.server => "/cable"
 end
