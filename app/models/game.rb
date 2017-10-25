@@ -11,6 +11,7 @@ class Game < ApplicationRecord
 
   def self.start(uuid1, uuid2)
     #This is all heavily chess dependent
+    #Can instead show what color highlighting the user will be given.
     white, black = [uuid1, uuid2].shuffle
 
     ActionCable.server.broadcast "player_#{white}", {action: "game_start", msg: "white"}

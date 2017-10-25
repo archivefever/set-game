@@ -1,0 +1,8 @@
+production:
+  url: redis://localhost:3000
+
+development:
+  url: redis://localhost:3000
+
+test:
+  url: redis://localhost:3000
