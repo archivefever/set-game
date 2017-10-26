@@ -29,14 +29,18 @@ class Game < ApplicationRecord
   end
 
   def initial_deal
-    deal = self.undrawn_cards.sample(9)
-    deal.each do |card|
-      GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing")
+    if self.showing_cards.count == 0
+      deal = self.undrawn_cards.sample(9)
+      deal.each do |card|
+        GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing")
+      end
+      if !possible_sets?
+        deal << next_deal
+      end
+      deal.flatten
+    else
+      self.showing_cards
     end
-    if !possible_sets?
-      deal << next_deal
-    end
-    deal.flatten
   end
 
   def game_over?

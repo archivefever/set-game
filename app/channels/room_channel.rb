@@ -24,5 +24,9 @@ class RoomChannel < ApplicationCable::Channel
       # ActionCable.server.broadcast "room_channel", {action: "next_deal", next_deal: render_next_deal, sets_made: game.sets_made}
   end
 
+  def select_cards(card)
+    ActionCable.server.broadcast "room_channel", {action: "select_cards", card: card }
+  end
+
 end
 

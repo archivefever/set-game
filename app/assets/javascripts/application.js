@@ -86,7 +86,8 @@ $(document).ready(function() {
       event.preventDefault();
       if(selectedCards.length < 2){
         var card_id = $(this).find(".card-id").attr("id")
-        $(this).removeClass("hint").toggleClass("selected-cards");
+        // $(this).removeClass("hint").toggleClass("selected-cards");
+        App.room.selectCards(card_id);
         if(selectedCards[0] === card_id) {
           selectedCards.splice(0,1);
         }
@@ -96,7 +97,9 @@ $(document).ready(function() {
        }
       else if(selectedCards.length === 2){
         var card_id = $(this).find(".card-id").attr("id")
-        $(this).removeClass("hint").toggleClass("selected-cards");
+        // $(this).removeClass("hint").toggleClass("selected-cards");
+        cardLocation = $(this)
+        App.room.selectCards(card_id);
         if(selectedCards[0] === card_id) {
           selectedCards.splice(0, 1)
         }

@@ -12,6 +12,13 @@ App.room = App.cable.subscriptions.create("RoomChannel", {
         $(".card-show").remove(".selected-cards");
         $('#sets-made').text(data.sets_made);
         $('#remaining-cards').text(data.remaining_cards);
+        break;
+
+      case "select_cards":
+      console.log("receiving select cards info...");
+      var cardSelection = data.card.card
+        $("#" + cardSelection).closest('.card-show').removeClass("hint").toggleClass("selected-cards");
+        break;
     }
   },
   speak: function() {
@@ -22,4 +29,8 @@ App.room = App.cable.subscriptions.create("RoomChannel", {
     console.log("checking cards...")
     return this.perform('check_cards', {card_data: selectedCards, game_id: gameId })
   },
+  selectCards: function(card) {
+    gameId = $('#game-id').text();
+    return this.perform('select_cards', {card: card})
+  }
 });
