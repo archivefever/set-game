@@ -20,25 +20,9 @@ class Game < ApplicationRecord
     # Somewhere in here, there needs to be some logic that finishes the game if there are no new cards and no possible sets.
   end
 
-  def next_deal
-    new_cards = self.undrawn_cards.sample(3)
-    new_cards.each do |card|
-      GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing")
-    end
-    new_cards << next_deal if !possible_sets?
-    new_cards.flatten
-  end
 
-  def initial_deal
-    deal = self.undrawn_cards.sample(9)
-    deal.each do |card|
-      GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing")
-    end
-    if !possible_sets?
-      deal << next_deal
-    end
-    deal.flatten
-  end
+
+
 
   def game_over?
     undrawn_cards == 0 && !possible_sets
@@ -64,6 +48,41 @@ class Game < ApplicationRecord
     end
     condition
   end
+
+######################
+# Dan's work October 26:
+
+  #DI: board_position needs to be made dynamic
+  def place_card
+    card = self.undrawn_cards.sample(1)[0]
+    GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing", board_position: 1)
+    card
+  end
+
+  def initial_deal
+    deal = []
+    9.times do deal << place_card end
+    while !possible_sets?
+      3.times do deal << place_card end
+    end
+    deal
+  end
+
+  def next_deal
+      deal = []
+      3.times do deal << place_card end
+      while !possible_sets?
+        3.times do deal << place_card end
+      end
+    deal
+  end
+
+  def calculate_game_state
+
+
+  end
+
+
 
 #######################
 

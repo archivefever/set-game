@@ -106,7 +106,7 @@ $(document).ready(function() {
           selectedCards.push(card_id);
           if (checkSetArray(selectedCards)) {
             $.ajax({
-              url: '/games/check_cards',
+              url: '/games/update_game_state',
               method: 'POST',
               data: { selectedCardIds: selectedCards },
             })
