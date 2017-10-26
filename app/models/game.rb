@@ -1,3 +1,5 @@
+require_relative 'sets'
+
 class Game < ApplicationRecord
   include ActionView::Helpers::DateHelper
 
@@ -15,7 +17,7 @@ class Game < ApplicationRecord
   end
 
   def duct_tape
-   return next_deal if !possible_sets? || showing_cards.length < 9
+   return next_deal if !possible_sets?(all_sets) || showing_cards.length < 9
     []
     # Somewhere in here, there needs to be some logic that finishes the game if there are no new cards and no possible sets.
   end
@@ -25,24 +27,24 @@ class Game < ApplicationRecord
 
 
   def game_over?
-    undrawn_cards == 0 && !possible_sets
+    undrawn_cards == 0 && !possible_sets(all_sets)
   end
 
   def cheat
     true_sets = []
     showing_cards.to_a.combination(3).to_a.each do |card_ary|
-      if SetMatcher.is_a_set?(card_ary)
+      if SetMatcher.is_a_set?(card_ary, all_sets)
         true_sets << card_ary
       end
     end
     true_sets
   end
 
-  def possible_sets?
+  def possible_sets?(all_sets)
     reload
     condition = false
     showing_cards.to_a.combination(3).to_a.each do |card_ary|
-      if SetMatcher.is_a_set?(card_ary)
+      if SetMatcher.is_a_set?(card_ary, all_sets)
         condition = true
       end
     end
@@ -59,19 +61,17 @@ class Game < ApplicationRecord
     card
   end
 
+  #DI: We need a new way of checking whether there are possible sets in an initial deal, because trying to pass in all_sets an an argument here would ruin everything.
   def initial_deal
     deal = []
     9.times do deal << place_card end
-    while !possible_sets?
-      3.times do deal << place_card end
-    end
     deal
   end
 
   def next_deal
       deal = []
       3.times do deal << place_card end
-      while !possible_sets?
+      while !possible_sets?(all_sets)
         3.times do deal << place_card end
       end
     deal

@@ -1,8 +1,10 @@
 class SetMatcher
 
-  def self.is_a_set?(cards)
+  def self.is_a_set?(cards, all_sets)
+    p all_sets[0]
     attributes_for_set(cards, :color) && attributes_for_set(cards, :shading) && attributes_for_set(cards, :number) && attributes_for_set(cards, :shape)
   end
+
 
   def self.find_cards(id_ary)
     found_cards = []
@@ -29,5 +31,6 @@ class SetMatcher
 
     (card_1.send(attribute) == card_2.send(attribute) && card_1.send(attribute) == card_3.send(attribute) && card_2.send(attribute) == card_3.send(attribute)) || (card_1.send(attribute) != card_2.send(attribute) && card_1.send(attribute) != card_3.send(attribute) && card_2.send(attribute) != card_3.send(attribute))
   end
+
 
 end
