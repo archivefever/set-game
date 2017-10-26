@@ -27,25 +27,9 @@ class GamesController < ApplicationController
     end
   end
 
-  # DI, Oct 26: We are checking cards on the front end, so we don't need this anymore.
-  # The make_group and duct_tape functionality will have to be called elsewhere.
-  # def check_cards
-  #   p params[:selectedCardIds]
-  #   player_selection = SetMatcher.find_cards(params[:selectedCardIds])
-  #   if SetMatcher.is_a_set?(player_selection)
-  #     SetMatcher.make_group(player_selection, current_game.id)
-  #      respond_to do |format|
-  #       format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: current_game.duct_tape}}
-  #      end
-    # else
-    #   respond_to do |format|
-    #     format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: player_selection}}
-    #    end
-  #   end
-  # end
 
   def update_game_state
-    p "UPDATE GAME STATE"
+    p "UPDATING GAME STATE"
     p params[:selectedCardIds]
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
     SetMatcher.make_group(player_selection, current_game.id)

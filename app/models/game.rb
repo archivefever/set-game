@@ -1,6 +1,7 @@
 require_relative 'sets'
 
 class Game < ApplicationRecord
+  include All_Sets
   include ActionView::Helpers::DateHelper
 
   belongs_to :player, optional: true
@@ -33,18 +34,18 @@ class Game < ApplicationRecord
   def cheat
     true_sets = []
     showing_cards.to_a.combination(3).to_a.each do |card_ary|
-      if SetMatcher.is_a_set?(card_ary, all_sets)
+      if SetMatcher.is_a_set?(card_ary)
         true_sets << card_ary
       end
     end
     true_sets
   end
 
-  def possible_sets?(all_sets)
+  def possible_sets?
     reload
     condition = false
     showing_cards.to_a.combination(3).to_a.each do |card_ary|
-      if SetMatcher.is_a_set?(card_ary, all_sets)
+      if SetMatcher.is_a_set?(card_ary, self::ALL_SETS)
         condition = true
       end
     end
