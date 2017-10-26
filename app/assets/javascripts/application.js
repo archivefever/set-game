@@ -33,16 +33,16 @@ getRemainingCards = function() {
     });
 };
 
-var setCount = function() {
-    $.ajax({
-      url: '/games/set_count',
-      method: 'POST',
-    })
+// var setCount = function() {
+//     $.ajax({
+//       url: '/games/set_count',
+//       method: 'POST',
+//     })
 
-    .done(function(ajaxReturn) {
-      $('#sets-made').text(ajaxReturn);
-    });
-};
+//     .done(function(ajaxReturn) {
+//       $('#sets-made').text(ajaxReturn);
+//     });
+// };
 
 var checkForSets = function(cardsOnBoard) {
   var possibleSets = [];
@@ -75,6 +75,7 @@ $(document).ready(function() {
   $(this).on('keypress', function(event) {
     if (event.keyCode == 13) {
        showHints(checkForSets(getCardsOnBoard()));
+       // App.room.speak();
     }
   });
 
@@ -105,21 +106,12 @@ $(document).ready(function() {
         else {
           selectedCards.push(card_id);
           if (checkSetArray(selectedCards)) {
-            $.ajax({
-              url: '/games/check_cards',
-              method: 'POST',
-              data: { selectedCardIds: selectedCards },
-            })
-            .done(function(ajaxReturn) {
-              $("#all-cards").append(ajaxReturn);
-              $("#response-bar").text("Nice Work!");
-            })
-            .always(function(ajaxReturn){
-              $(".card-show").remove(".selected-cards");
-              selectedCards = []
-            getRemainingCards();
-            setCount();
-            });
+
+            App.room.checkCards(selectedCards);
+            selectedCards = []
+            // getRemainingCards();
+            // setCount();
+
           }
           else {
             $("#response-bar").text("Bad Set, Try Again");
