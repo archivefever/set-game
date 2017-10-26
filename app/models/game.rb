@@ -17,6 +17,7 @@ class Game < ApplicationRecord
   def duct_tape
    return next_deal if !possible_sets? || showing_cards.length < 9
     []
+    # Somewhere in here, there needs to be some logic that finishes the game if there are no new cards and no possible sets.
   end
 
   def next_deal
@@ -67,12 +68,12 @@ class Game < ApplicationRecord
 #######################
 
   def game_time
-    last_updated_card = GameCard.where("game_id = ?", self.id).where('updated_at != created_at').order('updated_at DESC').first
-    time_ago_in_words(last_updated_card.created_at)
+    last_updated_card = GameCard.where(game_id: self.id).order(:updated_at).last
+    TimeDifference.between(last_updated_card.created_at, last_updated_card.updated_at).in_minutes.round
   end
 
   def sets_made
-    GameCard.where("game_id = ?", self.id).where(status: "grouped").count/3
+    GameCard.where(game_id: self.id, status: "grouped").count/3
   end
 
 
