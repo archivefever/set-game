@@ -67,7 +67,8 @@ class Game < ApplicationRecord
 
   #DI: board_position needs to be made dynamic
   def place_card
-    card = self.undrawn_cards.sample(1)[0]
+    card = self.undrawn_cards.sample
+
     GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing", board_position: 1)
     reload
     card

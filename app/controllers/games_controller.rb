@@ -8,7 +8,8 @@ class GamesController < ApplicationController
     @game.load_deck
     session[:game_id] = @game.id
     if current_user
-      @game.update_attributes(player_id: current_user.id)
+      #@game.update_attributes(player: current_user)
+      @game.players << current_user
     end
     redirect_to game_path(@game)
   end
