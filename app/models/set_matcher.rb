@@ -1,8 +1,8 @@
 class SetMatcher
 
-  def self.is_a_set?(cards)
+  def self.is_a_set?(card_ids)
     cards.sort!
-    $all_sets_SetMatcher.include?(cards)
+    $all_sets_SetMatcher.include?(card_ids)
   end
 
 
