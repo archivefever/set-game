@@ -11,6 +11,8 @@ class Game < ApplicationRecord
   has_many :showing_cards, ->{ where("game_cards.status" => "showing")}, through: :game_cards, source: :card
   has_many :grouped_cards, ->{ where("game_cards.status" => "grouped")}, through: :game_cards, source: :card
 
+  # serialize :board
+
 
   def load_deck
     81.times { |n| GameCard.create(game_id: self.id, card_id: n + 1) }
@@ -64,33 +66,50 @@ class Game < ApplicationRecord
 
 ######################
 # Dan's work October 26:
-
+# MOVED to SetMatcher by dan & clint
   #DI: board_position needs to be made dynamic
-  def place_card
-    card = self.undrawn_cards.sample
 
-    GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing", board_position: 1)
-    reload
+  def set_board_position(card)
+      new_position = self.board.index("0")
+      self.board[new_position] = card.id.to_s
+      self.update_attributes(board: self.board)
+      new_position
+  end
+
+  def place_card
+    card = undrawn_cards.sample
+    new_position = set_board_position(card)
+    GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing", board_position: new_position)
+    # reload
     card
   end
 
+  def remove_card(card)
+    slot = self.board.index(card.id.to_s)
+    self.board[slot] = "0"
+    self.update_attributes(board: self.board)
+  end
+
   def initial_deal
-    deal = []
-    9.times do deal << place_card end
-      while !possible_sets?
-        3.times do deal << place_card end
-      end
-    deal
+    if showing_cards.count == 0
+      deal = []
+      9.times do deal << self.place_card end
+        while !possible_sets?
+          3.times do deal << self.place_card end
+        end
+      deal
+    else
+      showing_cards
+    end
   end
 
   def next_deal
       deal = []
       3.times do
-        deal << place_card
-        reload
+        deal << self.place_card
       end
       while !possible_sets?
-        3.times do deal << place_card end
+        3.times do deal << self.place_card end
       end
     deal
   end

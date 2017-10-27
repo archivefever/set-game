@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20171027180151) do
   create_table "games", force: :cascade do |t|
     t.boolean "finished", default: false
     t.integer "winner"
+    t.string "board", default: ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

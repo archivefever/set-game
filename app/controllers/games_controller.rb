@@ -33,7 +33,7 @@ class GamesController < ApplicationController
     p "UPDATING GAME STATE"
     p params[:selectedCardIds]
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
-    SetMatcher.make_group(player_selection, current_game.id)
+    SetMatcher.make_group(player_selection, current_game)
     respond_to do |format|
       format.html { render partial: '/partials/card_show_next_deal', locals:{player_selection: current_game.duct_tape}}
     end
