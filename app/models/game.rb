@@ -3,8 +3,7 @@ require_relative 'sets'
 class Game < ApplicationRecord
   include ActionView::Helpers::DateHelper
 
-  # belongs_to :player, optional: true
-  has_and_belongs_to_many :players
+  has_and_belongs_to_many :players, optional: true
   has_many :game_cards
   has_many :cards, through: :game_cards
 
