@@ -32,7 +32,11 @@ class Game < ApplicationRecord
 
 
   def game_over?
-    undrawn_cards == 0 && !possible_sets
+    if undrawn_cards == 0 && !possible_sets
+      self.finished = true
+      return true
+    end
+    false
   end
 
   def cheat
