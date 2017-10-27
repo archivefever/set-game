@@ -80,7 +80,7 @@ class Game < ApplicationRecord
     card = undrawn_cards.sample
     new_position = set_board_position(card)
     GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing", board_position: new_position)
-    # reload
+    reload
     card
   end
 
@@ -94,9 +94,9 @@ class Game < ApplicationRecord
     if showing_cards.count == 0
       deal = []
       9.times do deal << self.place_card end
-        while !possible_sets?
-          3.times do deal << self.place_card end
-        end
+      while !possible_sets?
+        3.times do deal << self.place_card end
+      end
       deal
     else
       showing_cards
