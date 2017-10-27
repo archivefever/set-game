@@ -4,7 +4,8 @@ Rails.application.routes.draw do
     resources :players, only: [:new, :show, :create]
     resources :games, only: [:index, :new, :show, :create]
 
-    post '/games/check_cards' => 'games#check_cards'
+    # post '/games/check_cards' => 'games#check_cards'
+    post '/games/update_game_state' => 'games#update_game_state'
     post '/games/check_remaining_cards' => 'games#check_remaining_cards'
     post '/games/set_count' => 'games#set_count'
     get '/games/:id/stats' => 'games#stats'
@@ -14,3 +15,4 @@ Rails.application.routes.draw do
 
     root 'games#index'
 end
+

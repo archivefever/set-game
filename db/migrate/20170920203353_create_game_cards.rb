@@ -4,6 +4,9 @@ class CreateGameCards < ActiveRecord::Migration[5.1]
       t.integer   :game_id
       t.integer   :card_id
       t.string    :status, { default: "undrawn" }
+      t.integer   :board_position
+      t.integer   :grouped_in_set
+      t.integer   :grouped_by_player
 
       t.timestamps
     end

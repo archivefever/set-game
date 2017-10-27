@@ -1,7 +1,9 @@
+require_relative 'sets'
+
 class Game < ApplicationRecord
   include ActionView::Helpers::DateHelper
 
-  belongs_to :player, optional: true
+  has_and_belongs_to_many :players, optional: true
   has_many :game_cards
   has_many :cards, through: :game_cards
 
@@ -9,39 +11,32 @@ class Game < ApplicationRecord
   has_many :showing_cards, ->{ where("game_cards.status" => "showing")}, through: :game_cards, source: :card
   has_many :grouped_cards, ->{ where("game_cards.status" => "grouped")}, through: :game_cards, source: :card
 
+  # serialize :board
+
 
   def load_deck
     81.times { |n| GameCard.create(game_id: self.id, card_id: n + 1) }
   end
 
   def duct_tape
-   return next_deal if !possible_sets? || showing_cards.length < 9
-    []
+    if game_over?
+      SetMatcher.reset_set_counter
+      []
+    elsif !possible_sets? || showing_cards.length < 9
+      next_deal
+    else
+      []
+    end
+
     # Somewhere in here, there needs to be some logic that finishes the game if there are no new cards and no possible sets.
   end
 
-  def next_deal
-    new_cards = self.undrawn_cards.sample(3)
-    new_cards.each do |card|
-      GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing")
-    end
-    new_cards << next_deal if !possible_sets?
-    new_cards.flatten
-  end
-
-  def initial_deal
-    deal = self.undrawn_cards.sample(9)
-    deal.each do |card|
-      GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing")
-    end
-    if !possible_sets?
-      deal << next_deal
-    end
-    deal.flatten
-  end
-
   def game_over?
-    undrawn_cards == 0 && !possible_sets
+    if undrawn_cards == 0 && !possible_sets
+      self.finished = true
+      return true
+    end
+    false
   end
 
   def cheat
@@ -57,13 +52,74 @@ class Game < ApplicationRecord
   def possible_sets?
     reload
     condition = false
-    showing_cards.to_a.combination(3).to_a.each do |card_ary|
-      if SetMatcher.is_a_set?(card_ary)
+    card_ids = []
+    showing_cards.each do |card|
+      card_ids << card.id
+    end
+    card_ids.combination(3).to_a.each do |three_card_ids|
+      if SetMatcher.is_a_set?(three_card_ids)
         condition = true
       end
     end
     condition
   end
+
+######################
+# Dan's work October 26:
+# MOVED to SetMatcher by dan & clint
+  #DI: board_position needs to be made dynamic
+
+  def set_board_position(card)
+      new_position = self.board.index("0")
+      self.board[new_position] = card.id.to_s
+      self.update_attributes(board: self.board)
+      new_position
+  end
+
+  def place_card
+    card = undrawn_cards.sample
+    new_position = set_board_position(card)
+    GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing", board_position: new_position)
+    reload
+    card
+  end
+
+  def remove_card(card)
+    slot = self.board.index(card.id.to_s)
+    self.board[slot] = "0"
+    self.update_attributes(board: self.board)
+  end
+
+  def initial_deal
+    if showing_cards.count == 0
+      deal = []
+      9.times do deal << self.place_card end
+      while !possible_sets?
+        3.times do deal << self.place_card end
+      end
+      deal
+    else
+      showing_cards
+    end
+  end
+
+  def next_deal
+      deal = []
+      3.times do
+        deal << self.place_card
+      end
+      while !possible_sets?
+        3.times do deal << self.place_card end
+      end
+    deal
+  end
+
+  def calculate_game_state
+
+
+  end
+
+
 
 #######################
 
@@ -75,7 +131,6 @@ class Game < ApplicationRecord
   def sets_made
     GameCard.where(game_id: self.id, status: "grouped").count/3
   end
-
 
 end
 

@@ -38,11 +38,11 @@ describe Game do
       expect(game.undrawn_cards.count).to be <= 72
     end
 
-    it "has 0 grouped cards" do
-      game.load_deck
-      game.initial_deal
-      expect(game.grouped_cards.count).to eq 0
-    end
+    # it "has 0 grouped cards" do
+    #   game.load_deck
+    #   game.initial_deal
+    #   expect(game.grouped_cards.count).to eq 0
+    # end
   end
 
   describe "game after second deal" do
@@ -60,12 +60,12 @@ describe Game do
       expect(game.undrawn_cards.count).to be <= 69
     end
 
-    it "has 0 grouped cards when user hasn't made any sets" do
-      game.load_deck
-      game.initial_deal
-      game.next_deal
-      expect(game.grouped_cards.count).to eq 0
-    end
+    # it "has 0 grouped cards when user hasn't made any sets" do
+    #   game.load_deck
+    #   game.initial_deal
+    #   game.next_deal
+    #   expect(game.grouped_cards.count).to eq 0
+    # end
 
   end
 

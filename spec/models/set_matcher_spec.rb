@@ -6,19 +6,19 @@ describe SetMatcher do
 
   describe "SetMatcher" do
     it "can identify a correct set" do
-      set_of_cards = []
-      set_of_cards << Card.find(1)
-      set_of_cards << Card.find(41)
-      set_of_cards << Card.find(81)
+      set_of_cards = [1, 41, 81]
+      # set_of_cards << Card.find(1)
+      # set_of_cards << Card.find(41)
+      # set_of_cards << Card.find(81)
       condition = SetMatcher.is_a_set?(set_of_cards)
       expect(condition).to eq true
     end
 
     it "can identify a incorrect set" do
-      set_of_cards = []
-      set_of_cards << Card.find(1)
-      set_of_cards << Card.find(40)
-      set_of_cards << Card.find(81)
+      set_of_cards = [1, 40, 81]
+      # set_of_cards << Card.find(1)
+      # set_of_cards << Card.find(40)
+      # set_of_cards << Card.find(81)
       condition = SetMatcher.is_a_set?(set_of_cards)
       expect(condition).to eq false
     end
