@@ -17,9 +17,8 @@ class Game < ApplicationRecord
   end
 
   def duct_tape
-    if game_over?
-      []
-    elsif !possible_sets? || showing_cards.length < 9
+
+    if !possible_sets? || showing_cards.length < 9
       next_deal
     else
       []
@@ -68,6 +67,7 @@ class Game < ApplicationRecord
   def place_card
     card = self.undrawn_cards.sample(1)[0]
     GameCard.find_by(game_id: self.id, card_id: card.id).update_attributes(status: "showing", board_position: 1)
+    reload
     card
   end
 
@@ -82,7 +82,10 @@ class Game < ApplicationRecord
 
   def next_deal
       deal = []
-      3.times do deal << place_card end
+      3.times do
+        deal << place_card
+        reload
+      end
       while !possible_sets?
         3.times do deal << place_card end
       end
