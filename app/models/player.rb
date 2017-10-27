@@ -5,7 +5,7 @@ class Player < ApplicationRecord
     validates :username, :email, uniqueness: true
     validates :password, length: {minimum: 3}
 
-    has_many :games
+    has_and_belongs_to_many :games
     has_many :game_cards
 
 end
