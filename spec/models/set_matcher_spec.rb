@@ -10,7 +10,7 @@ describe SetMatcher do
       set_of_cards << Card.find(1)
       set_of_cards << Card.find(41)
       set_of_cards << Card.find(81)
-      condition = SetMatcher.is_a_set?(set_of_cards, all_sets)
+      condition = SetMatcher.is_a_set?(set_of_cards)
       expect(condition).to eq true
     end
 
@@ -19,7 +19,7 @@ describe SetMatcher do
       set_of_cards << Card.find(1)
       set_of_cards << Card.find(40)
       set_of_cards << Card.find(81)
-      condition = SetMatcher.is_a_set?(set_of_cards, all_sets)
+      condition = SetMatcher.is_a_set?(set_of_cards)
       expect(condition).to eq false
     end
   end
