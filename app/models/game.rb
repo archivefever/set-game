@@ -17,8 +17,10 @@ class Game < ApplicationRecord
   end
 
   def duct_tape
-
-    if !possible_sets? || showing_cards.length < 9
+    if game_over?
+      SetMatcher.reset_set_counter
+      []
+    elsif !possible_sets? || showing_cards.length < 9
       next_deal
     else
       []
@@ -26,10 +28,6 @@ class Game < ApplicationRecord
 
     # Somewhere in here, there needs to be some logic that finishes the game if there are no new cards and no possible sets.
   end
-
-
-
-
 
   def game_over?
     if undrawn_cards == 0 && !possible_sets

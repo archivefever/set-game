@@ -15,10 +15,16 @@ class SetMatcher
   end
 
   #DI: grouped_in_set needs to be made dynamic
+  @set_number = 1
   def self.make_group(cards, game_id)
     cards.each do |card|
-      GameCard.find_by(game_id: game_id, card_id: card.id).update_attributes(status: "grouped", board_position: nil, grouped_in_set: 1)
+      GameCard.find_by(game_id: game_id, card_id: card.id).update_attributes(status: "grouped", board_position: nil, grouped_in_set: @set_number)
     end
+    @set_number += 1
+  end
+
+  def reset_set_counter
+    @set_number = 1
   end
 
   private

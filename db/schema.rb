@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170920203353) do
 
   create_table "games", force: :cascade do |t|
     t.integer "player_id"
+    t.boolean "finished", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
