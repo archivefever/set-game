@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/apprentice/DanNighthawks/set-game/spec/models/game_spec.rb": [
+      "/Users/clintthacker/set/set-game/spec/models/game_spec.rb": [
         1,
         0,
         null,
@@ -42,21 +42,14 @@
         0,
         null,
         null,
-        0,
-        0,
-        0,
-        0,
         null,
         null,
         null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         null,
         null,
+        null,
+        null,
+        0,
         0,
         0,
         0,
@@ -69,13 +62,20 @@
         0,
         0,
         0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
         null,
         null
       ],
-      "/Users/apprentice/DanNighthawks/set-game/spec/rails_helper.rb": [
+      "/Users/clintthacker/set/set-game/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -136,14 +136,14 @@
         null,
         null
       ],
-      "/Users/apprentice/DanNighthawks/set-game/config/environment.rb": [
+      "/Users/clintthacker/set/set-game/config/environment.rb": [
         null,
         1,
         null,
         null,
         0
       ],
-      "/Users/apprentice/DanNighthawks/set-game/config/application.rb": [
+      "/Users/clintthacker/set/set-game/config/application.rb": [
         1,
         null,
         0,
@@ -177,41 +177,12 @@
         null,
         null
       ],
-      "/Users/apprentice/DanNighthawks/set-game/config/boot.rb": [
+      "/Users/clintthacker/set/set-game/config/boot.rb": [
         1,
         null,
         1
-      ],
-      "/Users/apprentice/DanNighthawks/set-game/spec/models/set_matcher_spec.rb": [
-        1,
-        0,
-        null,
-        0,
-        null,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null
       ]
     },
-    "timestamp": 1509146706
+    "timestamp": 1509296328
   }
 }
