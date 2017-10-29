@@ -84,10 +84,20 @@ Game.sendSet = function(selectedCards) {
 
 };
 
-Game.setHintListener = function() {
-  $(this).on('keypress', function(event) {
+Game.getInitialDeal = function() {
+  App.game.requestInitialDeal();
+}
+
+Game.setKeyListeners = function() {
+  $(this).on('keydown', function(event) {
     if (event.keyCode == 13) {
        Game.showHints();
+    }
+  });
+
+  $(this).on('keydown', function(event) {
+    if (event.keyCode == 78) {
+       Game.getInitialDeal();
     }
   });
 };
