@@ -13,7 +13,7 @@
 <div id="card-grid">
 
   <ul id="all-cards">
-    <% @game.initial_deal.each do |card| %>
+    <% @game.showing_cards.each do |card| %>
       <%= render partial: "partials/card_show", locals: {card: card } %>
     <% end %>
   </ul>

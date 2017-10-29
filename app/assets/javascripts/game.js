@@ -11,25 +11,25 @@ Game.checkSetArray = function(array) {
   return false;
 };
 
-Game.getRemainingCards = function() {
-    $.ajax({
-      url: '/games/check_remaining_cards',
-      method: 'POST',
-    })
-    .done(function(ajaxReturn) {
-      $('#remaining-cards').text(ajaxReturn);
-    });
-};
+// Game.getRemainingCards = function() {
+//     $.ajax({
+//       url: '/games/check_remaining_cards',
+//       method: 'POST',
+//     })
+//     .done(function(ajaxReturn) {
+//       $('#remaining-cards').text(ajaxReturn);
+//     });
+// };
 
-Game.setCount = function() {
-    $.ajax({
-      url: '/games/set_count',
-      method: 'POST',
-    })
-    .done(function(ajaxReturn) {
-      $('#sets-made').text(ajaxReturn);
-    });
-};
+// Game.setCount = function() {
+//     $.ajax({
+//       url: '/games/set_count',
+//       method: 'POST',
+//     })
+//     .done(function(ajaxReturn) {
+//       $('#sets-made').text(ajaxReturn);
+//     });
+// };
 
 Game.checkForSets = function(cardsOnBoard) {
   var possibleSets = [];
@@ -57,32 +57,47 @@ Game.showHints = function() {
   });
 };
 
-Game.displayBadSet = function() {
-  $("#response-bar").text("Bad Set, Try Again");
-  $(".card-show").removeClass("selected-cards");
-};
+// Game.displayBadSet = function() {
+//   $("#response-bar").text("Bad Set, Try Again");
+//   $(".card-show").removeClass("selected-cards");
+// };
+
+// Game.sendSet = function(selectedCards) {
+//     $.ajax({
+//       url: '/games/update_game_state',
+//       method: 'POST',
+//       data: { selectedCardIds: selectedCards },
+//     })
+//     .done(function(ajaxReturn) {
+//       $("#all-cards").append(ajaxReturn);
+//       $("#response-bar").text("Nice Work!");
+//     })
+//     .always(function(ajaxReturn){
+//       $(".card-show").remove(".selected-cards");
+//     Game.getRemainingCards();
+//     Game.setCount();
+//     });
+// };
 
 Game.sendSet = function(selectedCards) {
-    $.ajax({
-      url: '/games/update_game_state',
-      method: 'POST',
-      data: { selectedCardIds: selectedCards },
-    })
-    .done(function(ajaxReturn) {
-      $("#all-cards").append(ajaxReturn);
-      $("#response-bar").text("Nice Work!");
-    })
-    .always(function(ajaxReturn){
-      $(".card-show").remove(".selected-cards");
-    Game.getRemainingCards();
-    Game.setCount();
-    });
+  App.game.checkSets(selectedCards);
+
 };
 
-Game.setHintListener = function() {
-  $(this).on('keypress', function(event) {
+Game.getInitialDeal = function() {
+  App.game.requestInitialDeal();
+}
+
+Game.setKeyListeners = function() {
+  $(this).on('keydown', function(event) {
     if (event.keyCode == 13) {
        Game.showHints();
+    }
+  });
+
+  $(this).on('keydown', function(event) {
+    if (event.keyCode == 78) {
+       Game.getInitialDeal();
     }
   });
 };
@@ -95,7 +110,7 @@ Game.handleSelectedCards = function() {
 
     if(selectedCards.length < 2){
       var card_id = $(this).find(".card-id").attr("id");
-      $(this).removeClass("hint").toggleClass("selected-cards");
+      App.game.selectCard(card_id);
       if(selectedCards[0] === card_id) {
         selectedCards.splice(0,1);
       }
@@ -105,7 +120,7 @@ Game.handleSelectedCards = function() {
      }
     else if(selectedCards.length === 2){
       var card_id = $(this).find(".card-id").attr("id");
-      $(this).removeClass("hint").toggleClass("selected-cards");
+      App.game.selectCard(card_id);
       if(selectedCards[0] === card_id) {
         selectedCards.splice(0, 1);
       }
@@ -119,7 +134,8 @@ Game.handleSelectedCards = function() {
           selectedCards = [];
         }
         else {
-          Game.displayBadSet();
+          App.game.broadcastBadSet();
+          $("#response-bar").text("Bad Set, Try Again");
           selectedCards = [];
         }
       }
