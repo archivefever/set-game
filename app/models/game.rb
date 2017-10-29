@@ -11,8 +11,21 @@ class Game < ApplicationRecord
   has_many :showing_cards, ->{ where("game_cards.status" => "showing")}, through: :game_cards, source: :card
   has_many :grouped_cards, ->{ where("game_cards.status" => "grouped")}, through: :game_cards, source: :card
 
-  # serialize :board
 
+  def self.start(uuid1, uuid2)
+
+    white, black = [uuid1, uuid2].shuffle
+
+    ActionCable.server.broadcast "player_#{uuid1}", {action: "game_start", msg: "player1"}
+    ActionCable.server.broadcast "player_#{uuid2}", {action: "game_start", msg: "player2"}
+
+    REDIS.set("opponent_for:#{uuid1}", black)
+    REDIS.set("opponent_for:#{uuid2}", white)
+  end
+
+  def self.opponent_for(uuid)
+    REDIS.get("opponent_for:#{uuid}")
+  end
 
   def load_deck
     81.times { |n| GameCard.create(game_id: self.id, card_id: n + 1) }

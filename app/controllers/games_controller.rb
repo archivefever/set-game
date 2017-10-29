@@ -1,9 +1,11 @@
 class GamesController < ApplicationController
 
   def index
+
   end
 
   def new
+    REDIS.set("clint", "dan")
     @game = Game.create
     @game.load_deck
     session[:game_id] = @game.id

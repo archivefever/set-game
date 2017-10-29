@@ -1,10 +1,10 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "game_channel"
+    stream_from "player_#{uuid}"
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    Seek.remove(uuid)
   end
 
   def check_sets(json)

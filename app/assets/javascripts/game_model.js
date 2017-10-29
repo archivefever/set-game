@@ -85,6 +85,7 @@ Game.sendSet = function(selectedCards) {
 };
 
 Game.getInitialDeal = function() {
+  console.log("sending request for initial deal...")
   App.game.requestInitialDeal();
 }
 

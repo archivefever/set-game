@@ -1,10 +1,19 @@
 App.game = App.cable.subscriptions.create("GameChannel", {
-  connected: function() {},
+  connected: function() {
+    return this.printMessage("Waiting for opponent...")
+  },
+  printMessage: function(message) {
+    console.log(message)
+  },
   disconnected: function() {},
   received: function(data) {
     console.log(data);
 
     switch(data.action) {
+
+      case "game_start":
+        Game.getInitialDeal();
+      break;
 
       case "next_deal_info":
         $("#all-cards").append(data.next_deal);
