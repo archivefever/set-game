@@ -100,7 +100,7 @@ Game.handleSelectedCards = function() {
 
     if(selectedCards.length < 2){
       var card_id = $(this).find(".card-id").attr("id");
-      $(this).removeClass("hint").toggleClass("selected-cards");
+      App.game.selectCard(card_id);
       if(selectedCards[0] === card_id) {
         selectedCards.splice(0,1);
       }
@@ -110,7 +110,7 @@ Game.handleSelectedCards = function() {
      }
     else if(selectedCards.length === 2){
       var card_id = $(this).find(".card-id").attr("id");
-      $(this).removeClass("hint").toggleClass("selected-cards");
+      App.game.selectCard(card_id);
       if(selectedCards[0] === card_id) {
         selectedCards.splice(0, 1);
       }
