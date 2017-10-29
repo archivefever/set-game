@@ -85,7 +85,7 @@ class Game < ApplicationRecord
   end
 
   def remove_card(card)
-    slot = self.board.index(card.id.to_s)
+    slot = self.board.index(card)
     self.board[slot] = "0"
     self.update_attributes(board: self.board)
   end

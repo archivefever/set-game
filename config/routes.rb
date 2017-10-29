@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :players, only: [:new, :show, :create]
     resources :games, only: [:index, :new, :show, :create]
 
+    mount ActionCable.server => '/cable'
+
     # post '/games/check_cards' => 'games#check_cards'
     post '/games/update_game_state' => 'games#update_game_state'
     post '/games/check_remaining_cards' => 'games#check_remaining_cards'

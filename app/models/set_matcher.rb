@@ -17,14 +17,21 @@ class SetMatcher
 
   #DI: grouped_in_set needs to be made dynamic
   def self.make_group(cards, game)
+
     cards.each do |card|
-      GameCard.find_by(game_id: game.id, card_id: card.id).update_attributes(status: "grouped", board_position: nil, grouped_in_set: 1)
+      GameCard.find_by(game_id: game.id, card_id: card.to_i).update_attributes(status: "grouped", board_position: nil, grouped_in_set: 1)
       game.remove_card(card)
     end
+
+  render_next_deal = ApplicationController.renderer.render(partial: '/partials/card_show_next_deal', locals:{player_selection: game.duct_tape})
+
+    ActionCable.server.broadcast "game_channel", {action: "next_deal_info", next_deal: render_next_deal, sets_made: game.sets_made, remaining_cards: game.undrawn_cards.count}
+
   end
 
 
   private
+
 
   # def self.is_a_set?(cards)
   #   attributes_for_set(cards, :color) && attributes_for_set(cards, :shading) && attributes_for_set(cards, :number) && attributes_for_set(cards, :shape)

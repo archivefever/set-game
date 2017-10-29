@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   Game.setHintListener();
-  Game.getRemainingCards();
+  // Game.getRemainingCards();
   Game.handleSelectedCards();
 
 });
