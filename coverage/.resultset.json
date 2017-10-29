@@ -1,8 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/a501/Documents/dev_bootcamp/set-game/spec/models/game_spec.rb": [
-        1,
+      "/Users/clintthacker/set/set-game/spec/models/game_spec.rb": [
         1,
         null,
         1,
@@ -43,6 +42,7 @@
         1,
         1,
         null,
+
         null,
         null,
         null,
@@ -51,19 +51,7 @@
         null,
         null,
         null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
         null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
         null,
         null,
         null,
@@ -77,7 +65,7 @@
         null,
         null
       ],
-      "/Users/a501/Documents/dev_bootcamp/set-game/spec/rails_helper.rb": [
+      "/Users/clintthacker/set/set-game/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -138,14 +126,14 @@
         null,
         null
       ],
-      "/Users/a501/Documents/dev_bootcamp/set-game/config/environment.rb": [
+      "/Users/clintthacker/set/set-game/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/Users/a501/Documents/dev_bootcamp/set-game/config/application.rb": [
+      "/Users/clintthacker/set/set-game/config/application.rb": [
         1,
         null,
         1,
@@ -479,106 +467,12 @@
         null,
         null
       ],
-      "/Users/a501/Documents/dev_bootcamp/set-game/app/models/sets.rb": [
+      "/Users/clintthacker/set/set-game/config/boot.rb": [
+        1,
+        null,
         1
-      ],
-      "/Users/a501/Documents/dev_bootcamp/set-game/app/models/application_record.rb": [
-        1,
-        1,
-        null
-      ],
-      "/Users/a501/Documents/dev_bootcamp/set-game/spec/models/set_matcher_spec.rb": [
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/a501/Documents/dev_bootcamp/set-game/app/models/set_matcher.rb": [
-        1,
-        null,
-        1,
-        1233,
-        1233,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        1,
-        null,
-        null
-      ],
-      "/Users/a501/Documents/dev_bootcamp/set-game/app/models/game_card.rb": [
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null
-      ],
-      "/Users/a501/Documents/dev_bootcamp/set-game/app/models/card.rb": [
-        1,
-        1,
-        1,
-        null,
-        null
       ]
     },
-    "timestamp": 1509299235
+    "timestamp": 1509296328
   }
 }
