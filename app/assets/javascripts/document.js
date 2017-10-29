@@ -1,11 +1,6 @@
 $(document).ready(function() {
 
-  $(this).on('keypress', function(event) {
-    if (event.keyCode == 13) {
-       Game.showHints();
-    }
-  });
-
+  Game.setHintListener();
   Game.getRemainingCards();
   Game.handleSelectedCards();
 
