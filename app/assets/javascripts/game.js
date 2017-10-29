@@ -4,7 +4,6 @@ var Game = function(){
 
 Game.checkSetArray = function(array) {
   for(var i=0; i < allSets.length; i++) {
-
     if (allSets[i].toString() === array.toString()) {
       return true;
     }
@@ -27,7 +26,6 @@ Game.setCount = function() {
       url: '/games/set_count',
       method: 'POST',
     })
-
     .done(function(ajaxReturn) {
       $('#sets-made').text(ajaxReturn);
     });
@@ -91,7 +89,6 @@ Game.setHintListener = function() {
 
 
 Game.handleSelectedCards = function() {
-
   var selectedCards = [];
   $("ul").on("click", ".card-show", function(event) {
     event.preventDefault();
@@ -110,10 +107,10 @@ Game.handleSelectedCards = function() {
       var card_id = $(this).find(".card-id").attr("id");
       $(this).removeClass("hint").toggleClass("selected-cards");
       if(selectedCards[0] === card_id) {
-        selectedCards.splice(0, 1)
+        selectedCards.splice(0, 1);
       }
       else if (selectedCards[1] === card_id) {
-        selectedCards.splice(1, 1)
+        selectedCards.splice(1, 1);
       }
       else {
         selectedCards.push(card_id);
