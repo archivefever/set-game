@@ -23,6 +23,11 @@ App.game = App.cable.subscriptions.create("GameChannel", {
       case "initial_deal_info":
       $("#all-cards").append(data.initial_deal);
       $('#remaining-cards').text(data.remaining_cards);
+      break;
+
+      case "bad_set":
+        $(".card-show").removeClass("selected-cards");
+        break;
 
     }
   },
@@ -41,5 +46,10 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     console.log("requesting initial deal...")
     gameId = $('#game-id').text();
     return this.perform('initial_deal', { game_id: gameId })
+  },
+
+  broadcastBadSet: function() {
+    gameId = $('#game-id').text();
+    return this.perform('bad_set')
   }
 });

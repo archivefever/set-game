@@ -57,10 +57,10 @@ Game.showHints = function() {
   });
 };
 
-Game.displayBadSet = function() {
-  $("#response-bar").text("Bad Set, Try Again");
-  $(".card-show").removeClass("selected-cards");
-};
+// Game.displayBadSet = function() {
+//   $("#response-bar").text("Bad Set, Try Again");
+//   $(".card-show").removeClass("selected-cards");
+// };
 
 // Game.sendSet = function(selectedCards) {
 //     $.ajax({
@@ -134,7 +134,8 @@ Game.handleSelectedCards = function() {
           selectedCards = [];
         }
         else {
-          Game.displayBadSet();
+          App.game.broadcastBadSet();
+          $("#response-bar").text("Bad Set, Try Again");
           selectedCards = [];
         }
       }

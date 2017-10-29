@@ -23,9 +23,12 @@ class GameChannel < ApplicationCable::Channel
   def initial_deal(json)
     p json
     game_id = json['game_id'].to_i
-    this_game = Game.find(game_id)
-    this_game.initial_deal
+    game = Game.find(game_id)
+    game.initial_deal
+  end
 
+  def bad_set
+    ActionCable.server.broadcast "game_channel", {action: "bad_set"}
   end
 
 end
