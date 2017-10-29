@@ -61,12 +61,12 @@ Game.showHints = function() {
 
 Game.handleSelectedCards = function() {
 
-  var selectedCards = []
+  var selectedCards = [];
     $("ul").on("click", ".card-show", function(event) {
       event.preventDefault();
 
       if(selectedCards.length < 2){
-        var card_id = $(this).find(".card-id").attr("id")
+        var card_id = $(this).find(".card-id").attr("id");
         $(this).removeClass("hint").toggleClass("selected-cards");
         if(selectedCards[0] === card_id) {
           selectedCards.splice(0,1);
@@ -76,7 +76,7 @@ Game.handleSelectedCards = function() {
         }
        }
       else if(selectedCards.length === 2){
-        var card_id = $(this).find(".card-id").attr("id")
+        var card_id = $(this).find(".card-id").attr("id");
         $(this).removeClass("hint").toggleClass("selected-cards");
         if(selectedCards[0] === card_id) {
           selectedCards.splice(0, 1)
@@ -106,7 +106,7 @@ Game.handleSelectedCards = function() {
           else {
             $("#response-bar").text("Bad Set, Try Again");
             $(".card-show").removeClass("selected-cards");
-              selectedCards = []
+              selectedCards = [];
           }
 
         }
