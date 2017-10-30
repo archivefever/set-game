@@ -1,6 +1,7 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
     stream_from "player_#{uuid}"
+    Seek.create(uuid)
   end
 
   def unsubscribed
@@ -21,7 +22,6 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def initial_deal(json)
-    p json
     game_id = json['game_id'].to_i
     game = Game.find(game_id)
     game.initial_deal

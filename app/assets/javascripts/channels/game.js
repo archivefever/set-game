@@ -12,6 +12,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     switch(data.action) {
 
       case "game_start":
+      console.log("receiving game start flag...")
         Game.getInitialDeal();
       break;
 
@@ -30,6 +31,8 @@ App.game = App.cable.subscriptions.create("GameChannel", {
         break;
 
       case "initial_deal_info":
+      console.log("data initial deal:")
+      console.log(data.initial_deal);
       $("#all-cards").append(data.initial_deal);
       $('#remaining-cards').text(data.remaining_cards);
       break;

@@ -117,6 +117,7 @@ class Game < ApplicationRecord
 
     render_init_deal = ApplicationController.renderer.render(partial: '/partials/card_show_next_deal', locals:{player_selection: init_deal})
 
+
     ActionCable.server.broadcast "game_channel", {action: "initial_deal_info", initial_deal: render_init_deal, remaining_cards: self.undrawn_cards.count}
 
   end
