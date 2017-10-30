@@ -62,5 +62,8 @@ div.hint {
 
  span#game-id {
   visibility: hidden;
+ }
 
+ span#player-id {
+  visibility: hidden;
  }

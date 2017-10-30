@@ -38,7 +38,7 @@ Game.showHints = function() {
 };
 
 Game.sendSet = function(selectedCards) {
-  App.game.checkSets(selectedCards);
+  App.game.sendSet(selectedCards);
 
 };
 

@@ -49,14 +49,16 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     }
   },
 
-  checkSets: function(cardArray) {
+  sendSet: function(cardArray) {
     gameId = $('#game-id').text();
-    return this.perform('check_sets', {card_ids: cardArray, game_id: gameId})
+    playerId = $('#player-id').text();
+    return this.perform('group_set', {card_ids: cardArray, game_id: gameId, player_id: playerId})
   },
 
   selectCard: function(cardId) {
     gameId = $('#game-id').text();
-    return this.perform('select_card', {card: cardId})
+    playerId = $('#player-id').text();
+    return this.perform('select_card', {card: cardId, player_id: playerId})
   },
 
   requestInitialDeal: function() {

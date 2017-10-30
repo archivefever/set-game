@@ -9,9 +9,12 @@ class GameChannel < ApplicationCable::Channel
     Seek.remove(uuid)
   end
 
-  def check_sets(json)
+  def group_set(json)
     card_ids = json['card_ids']
     game_id = json['game_id'].to_i
+    player_id = json['player_id'].to_i
+
+    player = Player.find(player_id)
     current_game = Game.find(game_id)
     player_selection = SetMatcher.find_cards(card_ids)
     SetMatcher.make_group(card_ids, current_game)
