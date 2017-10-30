@@ -3,7 +3,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     return this.printMessage("Waiting for opponent...")
   },
   printMessage: function(message) {
-    console.log(message)
+    $('#opponent').text("WAITING...");
   },
   disconnected: function() {},
   received: function(data) {
@@ -13,7 +13,12 @@ App.game = App.cable.subscriptions.create("GameChannel", {
 
       case "game_start":
       console.log("receiving game start flag...")
+      if(data.player === "1") {
         Game.getInitialDeal();
+      } else if (data.player === "2") {
+        console.log("player2 reload page")
+      };
+      $('#opponent').text(data.msg);
       break;
 
       case "next_deal_info":

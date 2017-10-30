@@ -11,26 +11,6 @@ Game.checkSetArray = function(array) {
   return false;
 };
 
-// Game.getRemainingCards = function() {
-//     $.ajax({
-//       url: '/games/check_remaining_cards',
-//       method: 'POST',
-//     })
-//     .done(function(ajaxReturn) {
-//       $('#remaining-cards').text(ajaxReturn);
-//     });
-// };
-
-// Game.setCount = function() {
-//     $.ajax({
-//       url: '/games/set_count',
-//       method: 'POST',
-//     })
-//     .done(function(ajaxReturn) {
-//       $('#sets-made').text(ajaxReturn);
-//     });
-// };
-
 Game.checkForSets = function(cardsOnBoard) {
   var possibleSets = [];
   Util.getAllPossibleCombinations(cardsOnBoard, 3, possibleSets);
@@ -56,28 +36,6 @@ Game.showHints = function() {
     $("#" + cardId).closest('.card-show').toggleClass("hint");
   });
 };
-
-// Game.displayBadSet = function() {
-//   $("#response-bar").text("Bad Set, Try Again");
-//   $(".card-show").removeClass("selected-cards");
-// };
-
-// Game.sendSet = function(selectedCards) {
-//     $.ajax({
-//       url: '/games/update_game_state',
-//       method: 'POST',
-//       data: { selectedCardIds: selectedCards },
-//     })
-//     .done(function(ajaxReturn) {
-//       $("#all-cards").append(ajaxReturn);
-//       $("#response-bar").text("Nice Work!");
-//     })
-//     .always(function(ajaxReturn){
-//       $(".card-show").remove(".selected-cards");
-//     Game.getRemainingCards();
-//     Game.setCount();
-//     });
-// };
 
 Game.sendSet = function(selectedCards) {
   App.game.checkSets(selectedCards);
@@ -143,3 +101,46 @@ Game.handleSelectedCards = function() {
     }
   });
 };
+
+
+// Game.displayBadSet = function() {
+//   $("#response-bar").text("Bad Set, Try Again");
+//   $(".card-show").removeClass("selected-cards");
+// };
+
+// Game.sendSet = function(selectedCards) {
+//     $.ajax({
+//       url: '/games/update_game_state',
+//       method: 'POST',
+//       data: { selectedCardIds: selectedCards },
+//     })
+//     .done(function(ajaxReturn) {
+//       $("#all-cards").append(ajaxReturn);
+//       $("#response-bar").text("Nice Work!");
+//     })
+//     .always(function(ajaxReturn){
+//       $(".card-show").remove(".selected-cards");
+//     Game.getRemainingCards();
+//     Game.setCount();
+//     });
+// };
+
+// Game.getRemainingCards = function() {
+//     $.ajax({
+//       url: '/games/check_remaining_cards',
+//       method: 'POST',
+//     })
+//     .done(function(ajaxReturn) {
+//       $('#remaining-cards').text(ajaxReturn);
+//     });
+// };
+
+// Game.setCount = function() {
+//     $.ajax({
+//       url: '/games/set_count',
+//       method: 'POST',
+//     })
+//     .done(function(ajaxReturn) {
+//       $('#sets-made').text(ajaxReturn);
+//     });
+// };

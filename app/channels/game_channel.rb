@@ -1,6 +1,7 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
     stream_from "player_#{uuid}"
+    stream_from "game_channel"
     Seek.create(uuid)
   end
 
