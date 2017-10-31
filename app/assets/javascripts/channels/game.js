@@ -18,7 +18,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
       } else if (data.player === "2") {
         console.log("player2 reload page")
       };
-      $('#opponent').text(data.msg);
+      // $('#opponent').text(data.msg);
       break;
 
       case "next_deal_info":
@@ -36,10 +36,12 @@ App.game = App.cable.subscriptions.create("GameChannel", {
         break;
 
       case "initial_deal_info":
-      console.log("data initial deal:")
+      console.log("data initial deal:");
       console.log(data.initial_deal);
       $("#all-cards").append(data.initial_deal);
       $('#remaining-cards').text(data.remaining_cards);
+      $('#opponent').text(data.players);
+
       break;
 
       case "bad_set":

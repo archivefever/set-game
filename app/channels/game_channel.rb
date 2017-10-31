@@ -17,7 +17,7 @@ class GameChannel < ApplicationCable::Channel
     player = Player.find(player_id)
     current_game = Game.find(game_id)
     player_selection = SetMatcher.find_cards(card_ids)
-    SetMatcher.make_group(card_ids, current_game)
+    SetMatcher.make_group(card_ids, current_game, player)
   end
 
   def select_card(json)

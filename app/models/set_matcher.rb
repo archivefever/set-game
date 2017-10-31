@@ -16,10 +16,12 @@ class SetMatcher
 
 
   #DI: grouped_in_set needs to be made dynamic
-  def self.make_group(cards, game)
+  def self.make_group(cards, game, player=nil)
+
 
     cards.each do |card|
       GameCard.find_by(game_id: game.id, card_id: card.to_i).update_attributes(status: "grouped", board_position: nil, grouped_in_set: 1)
+      player.grouped_cards << card if player
       game.remove_card(card)
     end
 
