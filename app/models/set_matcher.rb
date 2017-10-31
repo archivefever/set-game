@@ -21,7 +21,7 @@ class SetMatcher
 
     cards.each do |card|
       game_card = GameCard.find_by(game_id: game.id, card_id: card.to_i)
-      game_card.update_attributes(status: "grouped", board_position: nil, grouped_in_set: 1)
+      game_card.update_attributes(status: "grouped", grouped_by_player: player.id, board_position: nil, grouped_in_set: 1)
       # player.grouped_cards << game_card if player
       game.remove_card(card)
     end
