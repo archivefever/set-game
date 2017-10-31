@@ -46,4 +46,8 @@ class GamesController < ApplicationController
     end
   end
 
+  def waiting
+
+  end
+
 end

@@ -20,6 +20,8 @@ class Game < ApplicationRecord
 
   def self.start(uuid1, uuid2)
 
+    # new_game = Game.create(player)
+
     player1, player2 = [uuid1, uuid2].shuffle
 
     ActionCable.server.broadcast "player_#{uuid1}", {action: "game_start", player: "1", msg: "player_#{uuid2}"}
