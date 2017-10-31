@@ -15,7 +15,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = current_game
+    @game = current_game || @game = Game.find(params[:id])
     @player = current_user if current_user
   end
 
