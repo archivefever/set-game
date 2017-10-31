@@ -11,6 +11,11 @@
   <span>sets!</span>
 </div>
 <div>
+  <span>Your opponent has made</span>
+  <strong><span id="opponent-sets-made">0</span></strong>
+  <span>sets!</span>
+</div>
+<div>
   <span>Your opponent is</span>
   <strong><span id="opponent">???</span></strong>
 </div>
@@ -24,7 +29,5 @@
 
 </div>
 <span id="game-id"><%=@game.id %></span>
+<span id="player-id"><%= @player.id if @player %></span>
 
-<% if @player %>
-<span id="player-id"><%=@player.id %></span>
-<% end %>

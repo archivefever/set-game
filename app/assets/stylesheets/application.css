@@ -60,10 +60,14 @@ div.hint {
   height: 200px;
  }
 
- span#game-id {
+#game-id {
   visibility: hidden;
  }
 
- span#player-id {
+#player-id {
   visibility: hidden;
  }
+
+#opponent-sets-made {
+  color: red;
+}

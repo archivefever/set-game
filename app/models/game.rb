@@ -12,6 +12,12 @@ class Game < ApplicationRecord
   has_many :grouped_cards, ->{ where("game_cards.status" => "grouped")}, through: :game_cards, source: :card
 
 
+
+  def grouped_sets_by_player(player)
+    self.game_cards.where("grouped_by_player" => player.id).count/3
+  end
+
+
   def self.start(uuid1, uuid2)
 
     player1, player2 = [uuid1, uuid2].shuffle
