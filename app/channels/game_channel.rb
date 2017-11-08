@@ -4,6 +4,7 @@ class GameChannel < ApplicationCable::Channel
     stream_from "game_channel"
     Seek.create(uuid)
   end
+
   def unsubscribed
     Seek.remove(uuid)
   end
