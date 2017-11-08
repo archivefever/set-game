@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
 
     if @player && @player.authenticate(params[:session][:password])
       session[:player_id] = @player.id
+      cookies[:user_id] = @player.id
       redirect_to "/"
     else
       redirect_to "/login", notice: "login info not right"

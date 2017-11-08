@@ -36,8 +36,6 @@ App.game = App.cable.subscriptions.create("GameChannel", {
         break;
 
       case "initial_deal_info":
-      console.log("data initial deal:");
-      console.log(data.initial_deal);
       $("#all-cards").append(data.initial_deal);
       $('#remaining-cards').text(data.remaining_cards);
       $('#opponent').text(data.players);

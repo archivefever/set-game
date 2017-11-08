@@ -31,8 +31,6 @@ class GamesController < ApplicationController
 
 
   def update_game_state
-    p "UPDATING GAME STATE"
-    p params[:selectedCardIds]
     player_selection = SetMatcher.find_cards(params[:selectedCardIds])
     SetMatcher.make_group(player_selection, current_game)
     respond_to do |format|

@@ -19,7 +19,8 @@ class Game < ApplicationRecord
 
 
   def self.start(uuid1, uuid2)
-
+    p uuid1
+    p uuid2
     # new_game = Game.create(player)
 
     player1, player2 = [uuid1, uuid2].shuffle
@@ -31,8 +32,8 @@ class Game < ApplicationRecord
     REDIS.set("opponent_for:#{uuid2}", player2)
   end
 
-  def self.opponent_for(uuid)
-    REDIS.get("opponent_for:#{uuid}")
+  def self.opponent_for(current_user)
+    REDIS.get("opponent_for:#{current_user}")
   end
 
   def load_deck

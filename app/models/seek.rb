@@ -1,14 +1,14 @@
 class Seek
-  def self.create(uuid)
+  def self.create(current_user)
     if opponent = REDIS.spop("seeks")
-      Game.start(uuid, opponent)
+      Game.start(current_user, opponent)
     else
-      REDIS.sadd("seeks", uuid)
+      REDIS.sadd("seeks", current_user)
     end
   end
 
-  def self.remove(uuid)
-    REDIS.srem("seeks", uuid)
+  def self.remove(current_user)
+    REDIS.srem("seeks", current_user)
   end
 
   def self.clear_all

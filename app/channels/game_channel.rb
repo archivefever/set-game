@@ -1,12 +1,13 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "player_#{uuid}"
+    stream_from "player_#{current_user}"
     stream_from "game_channel"
-    Seek.create(uuid)
+    p current_user
+    Seek.create(current_user)
   end
 
   def unsubscribed
-    Seek.remove(uuid)
+    Seek.remove(current_user)
   end
 
   def group_set(json)
