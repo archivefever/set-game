@@ -18,18 +18,13 @@ class Game < ApplicationRecord
   end
 
 
-  def self.start(uuid1, uuid2)
-    p uuid1
-    p uuid2
-    # new_game = Game.create(player)
+  def self.start(player1, player2)
 
-    player1, player2 = [uuid1, uuid2].shuffle
+    ActionCable.server.broadcast "#{player1}", {action: "game_start", player: "1", msg: "#{player2}"}
+    ActionCable.server.broadcast "#{player2}", {action: "game_start", player: "2", msg: "#{player1}"}
 
-    ActionCable.server.broadcast "player_#{uuid1}", {action: "game_start", player: "1", msg: "player_#{uuid2}"}
-    ActionCable.server.broadcast "player_#{uuid2}", {action: "game_start", player: "2", msg: "player_#{uuid1}"}
-
-    REDIS.set("opponent_for:#{uuid1}", player1)
-    REDIS.set("opponent_for:#{uuid2}", player2)
+    REDIS.set("opponent_for:#{player1}", player2)
+    REDIS.set("opponent_for:#{player2}", player1)
   end
 
   def self.opponent_for(current_user)
