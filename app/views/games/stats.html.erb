@@ -1,9 +1,9 @@
 <div>
-  <h1>Game Over!</h1>
+  <h2>Game Over!</h2>
 
-  <h2>Here are your stats:</h2>
-  <p>Game time: <%= @game.game_time %></p>
+  <h3>Here are your stats:</h3>
+  <p>Game Time: <%= @game.game_time %> minutes</p>
   <p>Sets Made: <%= @game.sets_made %></p>
 
-
+  <%= link_to "Play again?", new_game_path %>
 </div>
