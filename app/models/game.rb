@@ -116,6 +116,8 @@ class Game < ApplicationRecord
       deal
     else
       self.finished = true
+      undrawn_cards.count.times do deal << self.place_card end
+      deal
     end
   end
 
