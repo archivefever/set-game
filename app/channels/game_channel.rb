@@ -15,6 +15,7 @@ class GameChannel < ApplicationCable::Channel
     SetMatcher.make_group(card_ids, current_game)
   end
 
+
   def select_card(json)
     card_id = json['card']
     ActionCable.server.broadcast "game_channel", {action: "select_card", card: card_id }

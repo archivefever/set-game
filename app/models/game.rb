@@ -32,11 +32,7 @@ class Game < ApplicationRecord
   end
 
   def game_over?
-    if undrawn_cards == 0 && !possible_sets
-      self.finished = true
-      return true
-    end
-    false
+    undrawn_cards.count == 0 && !possible_sets?
   end
 
   def cheat
@@ -109,6 +105,7 @@ class Game < ApplicationRecord
   end
 
   def next_deal
+    if !game_over?
       deal = []
       3.times do
         deal << self.place_card
@@ -116,7 +113,10 @@ class Game < ApplicationRecord
       while !possible_sets?
         3.times do deal << self.place_card end
       end
-    deal
+      deal
+    else
+      self.finished = true
+    end
   end
 
   def calculate_game_state
@@ -138,5 +138,3 @@ class Game < ApplicationRecord
   end
 
 end
-
-

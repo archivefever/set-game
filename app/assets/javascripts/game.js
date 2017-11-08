@@ -84,7 +84,7 @@ Game.sendSet = function(selectedCards) {
 
 };
 
-// .getInitialDeal is called on keypress 'n' and NOT on pageload 
+// .getInitialDeal is called on keypress 'n' and NOT on pageload
 
 Game.getInitialDeal = function() {
   App.game.requestInitialDeal();
@@ -106,9 +106,13 @@ Game.setKeyListeners = function() {
 
 
 Game.handleSelectedCards = function() {
+
+
+
   var selectedCards = [];
   $("ul").on("click", ".card-show", function(event) {
     event.preventDefault();
+
 
     if(selectedCards.length < 2){
       var card_id = $(this).find(".card-id").attr("id");
