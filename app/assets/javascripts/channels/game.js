@@ -18,7 +18,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
       } else if (data.player === "2") {
         console.log("player2 reload page")
       };
-      // $('#opponent').text(data.msg);
+      $('#opponent').text(data.msg);
       break;
 
       case "next_deal_info":
