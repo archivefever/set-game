@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get '/logout' => 'sessions#destroy'
     get '/login' => 'sessions#new'
 
-    get '/waiting-room' => 'games#waiting'
+    get '/waiting-room' => 'games#waiting', as: 'waiting'
 
     root 'games#index'
 end

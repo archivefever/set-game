@@ -17,7 +17,7 @@ class Game < ApplicationRecord
     self.game_cards.where("grouped_by_player" => player.id).count/3
   end
 
-
+# takes string as argument
   def self.start(player1, player2)
 
     ActionCable.server.broadcast "#{player1}", {action: "game_start", player: "1", msg: "#{player2}"}
@@ -25,6 +25,7 @@ class Game < ApplicationRecord
 
     REDIS.set("opponent_for:#{player1}", player2)
     REDIS.set("opponent_for:#{player2}", player1)
+
   end
 
   def self.opponent_for(current_user)
