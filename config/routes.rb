@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  devise_for :players
     mount ActionCable.server => '/cable'
 
     # post '/games/check_cards' => 'games#check_cards'
