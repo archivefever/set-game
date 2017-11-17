@@ -6,7 +6,7 @@ class PlayersController < ApplicationController
 
   def show
     set_player
-    if current_user && current_user.id == @player.id
+    if player_signed_in? && current_player.id == @player.id
       render :show
     else
       redirect_to '/'

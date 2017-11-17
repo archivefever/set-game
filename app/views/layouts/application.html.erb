@@ -12,8 +12,8 @@
   <body>
     <div class="nav">
       <nav>
-        <% if current_user %>
-          Signed in as <a href="/players/<%= current_user.id %>"><%= current_user.username %></a> | <%= link_to "Logout", '/logout' %>
+        <% if player_signed_in? %>
+          Signed in as <a href="/players/<%= current_player.id %>"><%= current_player.username %></a> | <%= link_to "Logout", '/logout' %>
         <% else %>
           <%= link_to 'Login', '/login' %> | <%= link_to 'Register', '/players/new' %>
         <% end %>
