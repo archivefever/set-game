@@ -45,4 +45,8 @@ class GamesController < ApplicationController
     end
   end
 
+  def waiting_room
+
+  end
+
 end
