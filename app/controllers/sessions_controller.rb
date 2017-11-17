@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  def new
+  def player
   end
 
   def destroy
