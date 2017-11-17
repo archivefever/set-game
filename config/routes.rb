@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 
-  devise_for :players
     mount ActionCable.server => '/cable'
 
     # post '/games/check_cards' => 'games#check_cards'
@@ -9,12 +8,7 @@ Rails.application.routes.draw do
     post '/games/update_game_state' => 'games#update_game_state'
     post '/games/check_remaining_cards' => 'games#check_remaining_cards'
     post '/games/set_count' => 'games#set_count'
-    # get '/session-inspector' => 'sessions#inspector'
-    # get '/logout' => 'sessions#destroy'
-    # get '/login' => 'sessions#new'
 
-    # resources :sessions, only: [:new, :destroy, :create]
-    resources :players, only: [:show, :create]
     resources :games, only: [:index, :new, :show, :create]
 
     devise_for :players, controllers: {
