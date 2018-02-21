@@ -23,6 +23,11 @@ class GamesController < ApplicationController
   def show
     @game = current_game || @game = Game.find(params[:id])
     @player = current_user if current_user
+
+      p "**************"
+      p session[:game_id]
+      p "**************"
+
   end
 
   def stats
