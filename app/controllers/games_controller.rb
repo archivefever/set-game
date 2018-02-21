@@ -16,7 +16,7 @@ class GamesController < ApplicationController
 #       #@game.update_attributes(player: current_player)
 #       @game.players << current_player
 # >>>>>>> 06cf638aac80cef24b1db239e8b1bd2f04c26d46
-    end
+    # end
     redirect_to game_path(@game)
   end
 
