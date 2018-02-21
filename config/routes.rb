@@ -9,6 +9,12 @@ Rails.application.routes.draw do
     post '/games/check_remaining_cards' => 'games#check_remaining_cards'
     post '/games/set_count' => 'games#set_count'
 
+    resources :games, only: [:index, :new, :show, :create]
+
+    devise_for :players, controllers: {
+        sessions: 'players/sessions'
+    }
+
     get '/waiting-room' => 'games#waiting', as: 'waiting'
 
     root 'games#index'

@@ -7,7 +7,7 @@ class GamesController < ApplicationController
   def new
     @game = Game.create
     @game.load_deck
-    session[:game_id] = @game.id
+    cookies[:game_id] = @game.id
 # <<<<<<< HEAD
 #     if current_user
 #       @game.players << current_user

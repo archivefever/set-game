@@ -5,9 +5,12 @@ module ApplicationCable
 
     def connect
       p "@@@@@@@@@@@@"
-      p cookies[:user_id]
+      # p cookies[:user_id]
+      # p cookies[:player_id]
+      p env['warden'].user
+      # p env['warden'].player
       p "@@@@@@@@@@@@"
-      self.current_user = Player.find_by(id: cookies[:user_id])
+      self.current_user = Player.find_by(id: cookies[:player_id])
     end
 
     # private
