@@ -8,14 +8,14 @@ class GamesController < ApplicationController
     @game = Game.create
     @game.load_deck
     session[:game_id] = @game.id
-<<<<<<< HEAD
-    if current_user
-      @game.players << current_user
-=======
-    if player_signed_in?
-      #@game.update_attributes(player: current_player)
-      @game.players << current_player
->>>>>>> 06cf638aac80cef24b1db239e8b1bd2f04c26d46
+# <<<<<<< HEAD
+#     if current_user
+#       @game.players << current_user
+# =======
+#     if player_signed_in?
+#       #@game.update_attributes(player: current_player)
+#       @game.players << current_player
+# >>>>>>> 06cf638aac80cef24b1db239e8b1bd2f04c26d46
     end
     redirect_to game_path(@game)
   end
