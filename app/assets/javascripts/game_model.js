@@ -42,6 +42,8 @@ Game.sendSet = function(selectedCards) {
 
 };
 
+// .getInitialDeal is called on keypress 'n' and NOT on pageload
+
 Game.getInitialDeal = function() {
   console.log("sending request for initial deal...")
   App.game.requestInitialDeal();
