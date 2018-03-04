@@ -21,6 +21,7 @@ class SetMain extends React.Component {
           <CardCount />
           <SetsMade />
           <AllCards />
+          <span>GAME ID HERE</span>
         </div>
       </div>
     );
