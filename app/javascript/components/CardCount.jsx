@@ -3,6 +3,7 @@ import React from 'react';
 class CardCount extends React.Component {
   constructor(props) {
     super(props);
+    console.log('Landing on the CardCount page');
   }
 
   render() {

@@ -1,6 +1,8 @@
 import React from 'react';
 import CardCount from './CardCount';
 import SetsMade from './SetsMade';
+import AllCards from './AllCards';
+import Header from './Header';
 
 class SetMain extends React.Component {
   constructor(props) {
@@ -15,8 +17,10 @@ class SetMain extends React.Component {
           <h1>This is the Set Main Page</h1>
         </div>
         <div>
+          <Header />
           <CardCount />
           <SetsMade />
+          <AllCards />
         </div>
       </div>
     );
