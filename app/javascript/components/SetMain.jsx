@@ -15,6 +15,8 @@ class SetMain extends React.Component {
       <div>
         <div>
           <h1>This is the Set Main Page</h1>
+          <h2>Adding something new...</h2>
+          <h3>And another thing</h3>
         </div>
         <div>
           <Header />
