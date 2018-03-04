@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
     resources :games, only: [:index, :new, :show, :create]
 
+    resources :greetings, only: [:index]
+
     devise_for :players, controllers: {
     sessions: 'players/sessions'
     }
