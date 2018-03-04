@@ -1,8 +1,10 @@
 import React from 'react';
+import CardCount from './CardCount';
 
 class SetMain extends React.Component {
   constructor(props) {
     super(props);
+    console.log('Landing on the Set Main page');
   }
 
   render() {
