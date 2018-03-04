@@ -11,6 +11,15 @@ class SetMain extends React.Component {
   }
 
   render() {
+    App.comments = App.cable.subscriptions.create(
+      { channel: 'GameChannel' },
+      {
+        connected: function() {
+          console.log('Message in a bottle.');
+        }
+      }
+    );
+
     return (
       <div>
         <div>

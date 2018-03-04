@@ -16,6 +16,7 @@ class GamesController < ApplicationController
 
   def show
     @game = current_game
+    # ActionCable.server.broadcast("game_channel", message: "Message in a bottle")
   end
 
   def stats
