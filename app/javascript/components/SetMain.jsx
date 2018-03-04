@@ -1,5 +1,6 @@
 import React from 'react';
 import CardCount from './CardCount';
+import SetsMade from './SetsMade';
 
 class SetMain extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class SetMain extends React.Component {
         </div>
         <div>
           <CardCount />
+          <SetsMade />
         </div>
       </div>
     );
