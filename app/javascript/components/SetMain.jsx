@@ -8,9 +8,10 @@ class SetMain extends React.Component {
   constructor(props) {
     super(props);
     console.log('Landing on the Set Main page');
-    console.log(props);
+    // console.log(props);
     this.state = props;
     console.log(this.state);
+    console.log(this);
   }
 
   // logMessage() {
@@ -19,12 +20,17 @@ class SetMain extends React.Component {
   // }
 
   render() {
-    App.comments = App.cable.subscriptions.create(
+    App.game = App.cable.subscriptions.create(
       { channel: 'GameChannel' },
       {
         connected: function() {
-          console.log('Message in a bottle.');
+          console.log('Subscribed to the Game Channel');
           // console.log(this.state.message);
+        },
+        disconnected: function() {},
+        received: function(data) {
+          console.log('And the data should appear...');
+          console.log(data.message);
         }
       }
     );
@@ -33,13 +39,11 @@ class SetMain extends React.Component {
       <div>
         <div>
           <h1>This is the Set Main Page</h1>
-          <h2>Adding something new...</h2>
-          <h3>And another thing</h3>
-          <h4>xx{this.state.message}xx</h4>
+          <h4>xx{this.state.cardCount}xx</h4>
         </div>
         <div>
           <Header />
-          <CardCount />
+          <CardCount {...this.state} />
           <SetsMade />
           <AllCards />
           <span>GAME ID HERE</span>
