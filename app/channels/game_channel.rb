@@ -1,8 +1,8 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
     stream_from "game_channel"
-    ActionCable.server.broadcast "game_channel", {data: "Here is some data."}
-    p "Data is being sent."
+    # ActionCable.server.broadcast "game_channel", {data: "Here is some data."}
+    # p "Data is being sent."
   end
 
   def unsubscribed

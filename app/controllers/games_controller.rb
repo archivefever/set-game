@@ -16,7 +16,8 @@ class GamesController < ApplicationController
 
   def show
     @game = current_game
-    ActionCable.server.broadcast("game_channel", message: "Dunkirk Dunkirk")
+    # ActionCable.server.broadcast("game_channel", message: "Dunkirk Dunkirk")
+    @game.initial_deal
   end
 
   def stats

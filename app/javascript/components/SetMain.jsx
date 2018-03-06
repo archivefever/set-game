@@ -19,7 +19,12 @@ class SetMain extends React.Component {
   //   console.log(this.state.message);
   // }
 
+  updateGameState(data) {
+    this.setState(data);
+  }
+
   render() {
+    const myData = this;
     App.game = App.cable.subscriptions.create(
       { channel: 'GameChannel' },
       {
@@ -30,7 +35,9 @@ class SetMain extends React.Component {
         disconnected: function() {},
         received: function(data) {
           console.log('And the data should appear...');
-          console.log(data.message);
+          console.log(data);
+          propState.updateGameState(data);
+          console.log(this.state);
         }
       }
     );
@@ -39,7 +46,7 @@ class SetMain extends React.Component {
       <div>
         <div>
           <h1>This is the Set Main Page</h1>
-          <h4>xx{this.state.cardCount}xx</h4>
+          <h4>xxxx</h4>
         </div>
         <div>
           <Header />

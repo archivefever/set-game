@@ -1,7 +1,6 @@
-$(document).ready(function() {
+// $(document).ready(function() {
 
+//   Game.setKeyListeners();
+//   Game.handleSelectedCards();
 
-  Game.setKeyListeners();
-  Game.handleSelectedCards();
-
-});
+// });
